@@ -1,0 +1,548 @@
+---
+title: "2023_08_11_Final"
+output: html_document
+date: "2023-08-11"
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(comment=NA, prompt=FALSE, cache=FALSE, echo=TRUE, results = "html")
+library(psych)
+#library(lme4)
+library(ggplot2)
+library(sjPlot)
+library(ggeffects)
+library(arrow)
+library(ggpubr)
+library(tidyverse)
+#library(miceadds)
+library(sandwich)
+library(lmtest)
+library(emmeans)
+library(dplyr)
+```
+
+```{r load_data ,warning=FALSE, echo = FALSE}
+data_root <- "../../data"
+data <- read_parquet(file.path(data_root, "cleaned_data", "2023-06-18_long_form.parquet"))
+```
+
+```{r recode, echo = FALSE}
+# Recode for regression
+data$exp_response <-ifelse(data$exp_response == TRUE, 1, 0)
+data$veracity<-as.factor(data$veracity)
+data$Condition<-as.factor(data$Condition)
+data$option_cond <-as.factor(data$option_cond)
+data$congruency <-as.factor(data$congruency)
+data$congruency <-ifelse(data$congruency == "incongruent", 1, 0)
+
+data$age <- 2023 - data$year_birth
+data$age_recode <- data$age/10
+
+# Captures the five headline scenarios observed in our data
+data<- data %>% mutate(
+  cGPT_accuracy_recode = case_when(
+    veracity == TRUE & ano_true_false_unsure == "false" ~ "True_false",
+    veracity == FALSE & ano_true_false_unsure == "false" ~ "False_false",
+    veracity == TRUE & ano_true_false_unsure == "unsure" ~ "True_unsure",
+    veracity == FALSE & ano_true_false_unsure == "unsure" ~ "False_unsure",
+    veracity == TRUE & ano_true_false_unsure == "true" ~ "True_true",
+  ))
+
+# data$cGPT_accuracy_recode <-as.factor(data$cGPT_accuracy_recode)
+
+data = data[,c("exp_response", "Group", "veracity", "Condition", "option_cond", "congruency", "cGPT_accuracy_recode", "age", "edu_recoded", "ResponseId", "qualtrics_question_num", "AI_att_mean")]
+
+# Split belief and share datasets
+belief_data <- subset(data, data$Group == "Belief")
+share_data <- subset(data, data$Group == "Share")
+
+# Create version WITHOUT optional participants
+belief_data_no_opt <- belief_data[belief_data$Condition != "Optional",]
+share_data_no_opt <- share_data[share_data$Condition != "Optional",]
+
+# Create version with ONLY optional participants
+belief_data_opt<- belief_data[belief_data$Condition == "Optional",]
+share_data_opt<- share_data[share_data$Condition == "Optional",]
+```
+### Note: 
+- 1) The post hoc estimates are printed before conducting pairwise comparison
+- 2) Clustered standard errors were included for pairwise comparison. 
+
+
+### Contents:
+- [A. Confirm main text findings]
+	- [Set equations (confirm)]
+	- [A.1a Confirm main effects: Belief]
+	- [A.1b Confirm main effects: Share]
+	- [A.2a Confirm results accounting for AI judgement: Belief]
+	- [A.2b Confirm results accounting for AI judgement: Share]
+	- [A.3a Confirm results for Optional condition: Belief]
+	- [A.3b Confirm results for Optional condition: Share]
+- [B. Interactions]
+	- [Congruency]
+		- [Set equations (congruency)]
+		- [B.1a Main effects w. congruency: Belief]
+		- [B.1b Main effects w. congruency: Share]
+		- [B.2a Accounting for AI judgement w. congruency: Belief]
+		- [B.2b Accounting for AI judgement w. congruency: Share]
+		- [B.3a Optional w. congruency: Belief]
+		- [B.3b Optional w. congruency: Share]
+	- [Attitude towards AI (ATAI)]
+		- [Set equations (ATAI)]
+		- [B.4a Main effects w. ATAI: Belief]
+		- [B.4b Main effects w. ATAI: Share]
+		- [B.5a Accounting for AI judgement w. ATAI: Belief]
+		- [B.6b Accounting for AI judgement w. ATAI: Share]
+		- [B.7a Optional w. ATAI: Belief]
+		- [B.7b Optional w. ATAI: Share]
+
+### Set all pairs of interest utilized throughout the code
+```{r POI}
+ai_judge_pairs <-c("Control False_false - Forced False_false", "Control False_unsure - Forced False_unsure", "Control True_false - Forced True_false", "Control True_true - Forced True_true", "Control True_unsure - Forced True_unsure" )
+optional_pairs <-c( "Opt_in FALSE - Opt_out FALSE", "Opt_in TRUE - Opt_out TRUE")
+```
+
+### Define function to print model stats
+```{r p_func}
+# Define function to extract overall p-value of model
+model_p <- function(model_summary) {
+    f <- model_summary$fstatistic
+	p <- pf(f[1],f[2],f[3],lower.tail=F)
+    attributes(p) <- NULL # Ensures the value is numeric
+    if (p == 0) {
+        p <- "< 2.2e-16"
+    }
+    return(p)
+}
+
+print_summary <- function(model) {
+	model_summary <- summary(model)
+	f_statistic <- model_summary$fstatistic[1]
+	cat("F statistic:", f_statistic, "\n")
+	
+	# df_model <- model_summary$df[1]
+	# cat("Degrees of freedom (model):", df_model, "\n")
+	
+	df_residual <- model_summary$df[2]
+	cat("Degrees of freedom (residuals):", df_residual, "\n")
+	
+	p_value <- model_p(model_summary)
+	cat("P-value:", p_value, "\n")
+	
+	r2 <- model_summary$r.squared
+	cat("R-squared:", r2, "\n")
+	
+	r2adj <- model_summary$adj.r.squared
+	cat("Adjusted R-squared:", r2adj, "\n")
+}
+
+```
+
+# A. Confirm main text findings
+
+### Set equations (confirm)
+```{r set_equations}
+main_effects_formula = exp_response ~ Condition*veracity + age + edu_recoded
+five_way_formula = exp_response ~ Condition*cGPT_accuracy_recode + age + edu_recoded
+optional_formula = exp_response ~ option_cond * veracity + age + edu_recoded
+```
+
+### A.1a Confirm main effects: Belief
+```{r confirm_me_belief}
+mb_me <- lm(main_effects_formula, data = belief_data)
+
+print_summary(mb_me)
+
+clustered_se <- vcovCL(mb_me, cluster = belief_data[, c("ResponseId", "qualtrics_question_num")])
+coeftest(mb_me, vcov = clustered_se)
+```
+
+### A.1b Confirm main effects: Share
+
+```{r confirm_me_share}
+ms_me <- lm(main_effects_formula, data = share_data)
+
+print_summary(ms_me)
+
+clustered_se <- vcovCL(ms_me, cluster = share_data[, c("ResponseId", "qualtrics_question_num")])
+coeftest(ms_me, vcov = clustered_se)
+```
+
+### A.2a Confirm results accounting for AI judgement: Belief
+
+#### Fit regression model
+```{r confirm_w_AI_judgement_belief}
+mb_ai <- lm(five_way_formula, data = belief_data_no_opt)
+
+print_summary(mb_ai)
+
+clustered_se <- vcovCL(mb_ai, cluster = belief_data_no_opt[, c("ResponseId", "qualtrics_question_num")])
+coeftest(mb_ai, vcov = clustered_se)
+```
+
+
+
+#### Run post-hoc tests
+
+```{r AI_judgement_post_hoc_belief}
+test<-emmeans(mb_ai, ~ Condition* cGPT_accuracy_recode, infer = TRUE)
+test
+
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+ph_belief <- as.data.frame(pairwise) 
+res <- ph_belief[ph_belief$contrast %in% ai_judge_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+
+### A.2b Confirm results accounting for AI judgement: Share
+
+#### Fit regression model
+```{r confirm_w_AI_judgement_share}
+ms_ai <- lm(five_way_formula, data = share_data_no_opt)
+
+print_summary(ms_ai)
+
+clustered_se <- vcovCL(ms_ai, cluster = share_data_no_opt[, c("ResponseId", "qualtrics_question_num")])
+coeftest(ms_ai, vcov = clustered_se, cluster = share_data_no_opt[, c("ResponseId", "qualtrics_question_num")])
+```
+
+#### Run post-hoc tests
+
+```{r AI_judgement_post_hoc_share}
+test<-emmeans(ms_ai, ~ Condition* cGPT_accuracy_recode, infer = TRUE)
+test
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+
+ph_share <- as.data.frame(pairwise) #pairwise# pairs(test)
+res <- ph_share[ph_share$contrast %in% ai_judge_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+
+```
+
+
+### A.3a Confirm results for Optional condition: Belief
+
+#### Fit regression model
+```{r confirm_optional_belief}
+mb_opt <- lm(optional_formula, data = belief_data_opt)
+
+print_summary(mb_opt)
+
+clustered_se <- vcovCL(mb_opt, cluster = belief_data_opt[, c("ResponseId", "qualtrics_question_num")]) 
+coeftest(mb_opt, vcov = clustered_se)
+```
+
+#### Run post-hoc tests
+
+```{r optional_post_hoc_belief}
+test<- emmeans(mb_opt, ~ option_cond* veracity, infer = TRUE)
+test
+
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+ph_belief <- as.data.frame(pairwise)
+res <- ph_belief[ph_belief$contrast %in% optional_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+
+### A.3b Confirm results for Optional condition: Share
+
+#### Fit regression model
+```{r confirm_optional_share}
+ms_opt <- lm(optional_formula, data = share_data_opt )
+
+print_summary(ms_opt)
+
+clustered_se <- vcovCL(ms_opt, cluster = share_data_opt[, c("ResponseId", "qualtrics_question_num")]) 
+coeftest(ms_opt, vcov = clustered_se)
+```
+
+#### Run post-hoc tests
+
+```{r optional_post_hoc_share}
+test<-emmeans(ms_opt, ~ option_cond* veracity, infer= TRUE )
+test
+
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+ph_share <- as.data.frame(pairwise)
+res <- ph_share[ph_share$contrast %in% optional_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+---
+---
+---
+
+# B. Interactions
+
+## Congruency
+
+### Set equations (congruency)
+```{r set_equations_int_congruency}
+me_w_congruency_formula = exp_response ~ Condition*veracity*congruency + age + edu_recoded
+five_way_congruency_formula = exp_response ~ Condition*cGPT_accuracy_recode*congruency + age + edu_recoded
+optional_congruency_formula = exp_response ~ option_cond*veracity*congruency + age + edu_recoded
+```
+
+### B.1a Main effects w. congruency: Belief
+```{r me_congru_int_belief}
+mb_me_congru <- lm(me_w_congruency_formula, data = belief_data)
+
+print_summary(mb_me_congru)
+
+clustered_se <- vcovCL(mb_me_congru, cluster = belief_data[, c("ResponseId", "qualtrics_question_num")])
+coeftest(mb_me_congru, vcov = clustered_se)
+```
+
+### B.1b Main effects w. congruency: Share
+
+```{r me_congru_int_share}
+ms_me_congru <- lm(me_w_congruency_formula, data = share_data)
+
+print_summary(ms_me_congru)
+
+clustered_se <- vcovCL(ms_me_congru, cluster = share_data[, c("ResponseId", "qualtrics_question_num")])
+coeftest(ms_me_congru, vcov = clustered_se)
+```
+
+### B.2a Accounting for AI judgement w. congruency: Belief
+
+#### Fit regression model
+```{r AI_judgement_congruency_belief}
+mb_ai_congru <- lm(five_way_congruency_formula, data = belief_data_no_opt)
+
+print_summary(mb_ai_congru)
+
+clustered_se <- vcovCL(mb_ai_congru, cluster = belief_data_no_opt[, c("ResponseId", "qualtrics_question_num")])
+coeftest(mb_ai_congru, vcov = clustered_se)
+```
+
+#### Post-hoc test
+```{r AI_judgement_congruency_post_belief}
+test<- emtrends(mb_ai_congru, ~ Condition*cGPT_accuracy_recode, var="congruency", infer = TRUE)
+test
+
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+ph_belief <- as.data.frame(pairwise)
+res <- ph_belief[ph_belief$contrast %in% ai_judge_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+
+### B.2b Accounting for AI judgement w. congruency: Share
+
+#### Fit regression model
+```{r AI_judgement_congruency_share}
+ms_ai_congru <- lm(five_way_congruency_formula, data = share_data_no_opt)
+
+print_summary(ms_ai_congru)
+
+clustered_se <- vcovCL(ms_ai_congru, cluster = share_data_no_opt[, c("ResponseId", "qualtrics_question_num")])
+coeftest(ms_ai_congru, vcov = clustered_se)
+```
+
+#### Post-hoc test
+```{r AI_judgement_congruency_post_share}
+test<-emtrends(ms_ai_congru, ~ Condition*cGPT_accuracy_recode, var="congruency", infer =TRUE)
+test
+
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+ph_share <- as.data.frame(pairwise)
+res <- ph_share[ph_share$contrast %in% ai_judge_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+
+### B.3a Optional w. congruency: Belief
+
+#### Fit regression model
+```{r optional_congruency_belief}
+mb_opt_congru <- lm(optional_congruency_formula, data = belief_data_opt)
+
+print_summary(mb_opt_congru)
+
+clustered_se <- vcovCL(mb_opt_congru, cluster = belief_data_opt[, c("ResponseId", "qualtrics_question_num")]) 
+coeftest(mb_opt_congru, vcov = clustered_se)
+plot_model(mb_opt_congru, type  = "pred", terms =  c( "congruency", "option_cond",  "veracity"), title = "Moderting effects of headline congurency") + ylab("Believed") + theme_minimal()
+
+```
+
+#### Post-hoc test
+```{r optional_congruency_post_belief}
+test<-emtrends(mb_opt_congru, ~ option_cond*veracity, var="congruency", infer= TRUE)
+test
+
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+ph_belief <- as.data.frame(pairwise)
+res <- ph_belief[ph_belief$contrast %in% optional_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+
+### B.3b Optional w. congruency: Share
+
+#### Fit regression model
+```{r optional_congruency_share}
+ms_opt_congru <- lm(optional_congruency_formula, data = share_data_opt )
+
+print_summary(ms_opt_congru)
+
+clustered_se <- vcovCL(ms_opt_congru, cluster = share_data_opt[, c("ResponseId", "qualtrics_question_num")]) 
+coeftest(ms_opt_congru, vcov = clustered_se)
+plot_model(ms_opt_congru, type  = "pred", terms =  c( "congruency", "option_cond",  "veracity"), title = "Moderting effects of headline congurency") + ylab("Intention to share") + theme_minimal()
+
+```
+
+#### Post-hoc test
+```{r optional_congruency_post_share}
+test<-emtrends(ms_opt_congru, ~ option_cond*veracity, var="congruency", infer = TRUE)
+test
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+
+ph_share <- as.data.frame(pairwise)
+res <- ph_share[ph_share$contrast %in% optional_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+---
+
+
+## Attitude towards AI (ATAI)
+
+### Set equations (ATAI)
+```{r set_equations_int_atai}
+me_w_atai_formula = exp_response ~ Condition*veracity*AI_att_mean + age + edu_recoded
+five_way_atai_formula = exp_response ~ Condition*cGPT_accuracy_recode*AI_att_mean + age + edu_recoded
+optional_atai_formula = exp_response ~ option_cond*veracity*AI_att_mean + age + edu_recoded
+```
+
+### B.4a Main effects w. ATAI: Belief
+```{r me_atai_int_belief}
+mb_me_atai <- lm(me_w_atai_formula, data = belief_data)
+
+print_summary(mb_me_atai)
+
+clustered_se <- vcovCL(mb_me_atai, cluster = belief_data[, c("ResponseId", "qualtrics_question_num")])
+coeftest(mb_me_atai, vcov = clustered_se)
+```
+
+### B.4b Main effects w. ATAI: Share
+
+```{r me_atai_int_share}
+ms_me_atai <- lm(me_w_atai_formula, data = share_data)
+
+print_summary(ms_me_atai)
+
+clustered_se <- vcovCL(ms_me_atai, cluster = share_data[, c("ResponseId", "qualtrics_question_num")])
+coeftest(ms_me_atai, vcov = clustered_se)
+```
+
+### B.5a Accounting for AI judgement w. ATAI: Belief
+
+#### Fit regression model
+```{r AI_judgement_atai_belief}
+mb_ai_atai <- lm(five_way_atai_formula, data = belief_data_no_opt)
+
+print_summary(mb_ai_atai)
+
+clustered_se <- vcovCL(mb_ai_atai, cluster = belief_data_no_opt[, c("ResponseId", "qualtrics_question_num")])
+coeftest(mb_ai_atai, vcov = clustered_se)
+```
+
+#### Post-hoc test
+```{r AI_judgement_atai_post_belief}
+test<-emtrends(mb_ai_atai, ~ Condition*cGPT_accuracy_recode, var="AI_att_mean", infer =TRUE)
+test
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+
+ph_belief <- as.data.frame(pairwise)
+res <- ph_belief[ph_belief$contrast %in% ai_judge_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+### B.6b Accounting for AI judgement w. ATAI: Share
+
+#### Fit regression model
+```{r AI_judgement_atai_share}
+ms_ai_atai <- lm(five_way_atai_formula, data = share_data_no_opt)
+
+print_summary(ms_ai_atai)
+
+clustered_se <- vcovCL(ms_ai_atai, cluster = share_data_no_opt[, c("ResponseId", "qualtrics_question_num")])
+coeftest(ms_ai_atai, vcov = clustered_se)
+```
+
+#### Post-hoc test
+```{r AI_judgement_atai_post_share}
+test<- emtrends(ms_ai_atai, ~ Condition*cGPT_accuracy_recode, var="AI_att_mean", infer = TRUE)
+test
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+
+ph_share <- as.data.frame(pairwise)
+res <- ph_share[ph_share$contrast %in% ai_judge_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+### B.7a Optional w. ATAI: Belief
+
+#### Fit regression model
+```{r optional_atai_belief}
+mb_opt_atai <- lm(optional_atai_formula, data = belief_data_opt)
+
+print_summary(mb_opt_atai)
+
+clustered_se <- vcovCL(mb_opt_atai, cluster = belief_data_opt[, c("ResponseId", "qualtrics_question_num")]) 
+coeftest(mb_opt_atai, vcov = clustered_se)
+plot_model(mb_opt_atai, type  = "pred", terms =  c( "AI_att_mean", "option_cond",  "veracity"), title = "Moderting effects of ATAI") + ylab("Believed") + theme_minimal()
+```
+
+#### Post-hoc test
+```{r optional_atai_post_belief}
+test<- emtrends(mb_opt_atai, ~ option_cond*veracity, var="AI_att_mean", infer = TRUE)
+test
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+
+ph_belief <- as.data.frame(pairwise)
+res <- ph_belief[ph_belief$contrast %in% optional_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+
+### B.7b Optional w. ATAI: Share
+
+#### Fit regression model
+```{r optional_atai_share}
+ms_ai_atai <- lm(optional_atai_formula, data = share_data_opt )
+
+print_summary(ms_ai_atai)
+
+clustered_se <- vcovCL(ms_ai_atai, cluster = share_data_opt[, c("ResponseId", "qualtrics_question_num")]) 
+coeftest(ms_ai_atai, vcov = clustered_se)
+plot_model(ms_ai_atai, type  = "pred", terms =  c( "AI_att_mean", "option_cond",  "veracity"), title = "Moderting effects of ATAI") + ylab("Intention to share") + theme_minimal()
+
+```
+
+#### Post-hoc test
+```{r optional_atai_post_share}
+test<-emtrends(ms_ai_atai, ~ option_cond*veracity, var="AI_att_mean", infer = TRUE)
+test
+pairwise <- contrast(test, method = "pairwise", infer = c(TRUE, TRUE), adjust = "bonferroni", vcov = clustered_se)
+
+ph_share <- as.data.frame(pairwise)
+res <- ph_share[ph_share$contrast %in% optional_pairs,]
+res$p.value <- round(res$p.value, 5)
+res
+```
+

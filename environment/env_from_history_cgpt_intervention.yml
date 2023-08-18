@@ -1,0 +1,13 @@
+name: cgpt_intervention
+channels:
+  - defaults
+dependencies:
+  - python=3.9.12
+  - numpy
+  - scipy
+  - statsmodels
+  - matplotlib
+  - seaborn
+  - pip
+  - pandas=1.4.4
+prefix: /Users/mdeverna/.conda/envs/cgpt_intervention

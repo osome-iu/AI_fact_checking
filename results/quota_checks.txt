@@ -1,0 +1,351 @@
+SAMPLE DEMOGRAPHICS
+--------------------------------------------------
+Total num participants: 1548
+
+Gender:
+--------------------------------------------------
+COUNTS:
+----------
+Female    812
+Male      734
+Other       2
+Name: gender, dtype: int64 
+
+PERCENTAGES:
+----------
+Female    52.454780
+Male      47.416021
+Other      0.129199
+Name: gender, dtype: float64 
+
+Age:
+--------------------------------------------------
+COUNTS:
+----------
+65+      315
+45-54    275
+25-34    267
+35-44    259
+55-64    258
+18-24    174
+Name: age_bracket, dtype: int64 
+
+PERCENTAGES:
+----------
+65+      20.348837
+45-54    17.764858
+25-34    17.248062
+35-44    16.731266
+55-64    16.666667
+18-24    11.240310
+Name: age_bracket, dtype: float64 
+
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native / Other]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / Native Hawaiian or Pacific Islander]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Race:
+--------------------------------------------------
+COUNTS:
+----------
+White                        935
+Hispanic or Latino/a         268
+Black or African American    207
+Asian                         78
+Other                         60
+Name: race_final, dtype: int64 
+
+PERCENTAGES:
+----------
+White                        60.400517
+Hispanic or Latino/a         17.312661
+Black or African American    13.372093
+Asian                         5.038760
+Other                         3.875969
+Name: race_final, dtype: float64 
+
+Education:
+--------------------------------------------------
+COUNTS:
+----------
+Some college but no degree                                                402
+High school graduate (high school diploma or equivalent including GED)    393
+Bachelor's degree in college (4-year)                                     368
+Master's degree                                                           153
+Associate degree in college (2-year)                                      142
+Less than high school degree                                               48
+Professional degree (JD, MD)                                               22
+Doctoral degree                                                            20
+Name: edu, dtype: int64 
+
+COUNTS COMBINED:
+----------
+Counts less than college : 843
+Counts college and beyond: 705
+
+PERCENTAGES COMBINED:
+----------
+Percent less than college : 54.45736434108527%
+Percent college and beyond: 45.542635658914726%
+Party ID:
+--------------------------------------------------
+COUNTS:
+----------
+Democrat         746
+Republican       662
+Independent      103
+No preference     28
+Don't know         5
+Other              4
+Name: party_id, dtype: int64 
+
+PERCENTAGES:
+----------
+Democrat         48.191214
+Republican       42.764858
+Independent       6.653747
+No preference     1.808786
+Don't know        0.322997
+Other             0.258398
+Name: party_id, dtype: float64 
+
+CHECKING FOR GROUP DIFFERENCES
+##################################################
+##################################################
+Gender:
+--------------------------------------------------
+COUNTS:
+----------
+     Group Condition  gender  count
+0   Belief   Control  Female    125
+1   Belief   Control    Male    116
+2   Belief    Forced  Female    138
+3   Belief    Forced    Male    109
+4   Belief  Optional  Female    126
+5   Belief  Optional    Male    133
+6   Belief  Optional   Other      2
+7    Share   Control  Female    145
+8    Share   Control    Male    122
+9    Share    Forced  Female    147
+10   Share    Forced    Male    122
+11   Share  Optional  Female    131
+12   Share  Optional    Male    132 
+
+Drop two participants who report as 'Other / Non-binary'
+
+STATISTICAL DIFFERENCE BASED ON GROUP:
+----------
+	- Group: Belief
+	- Chi-squared statistic: 2.6482285880750873
+	- p-value: 0.2660384866433127
+	- Degrees of freedom: 2
+-------------------------------------------------- 
+
+	- Group: Share
+	- Chi-squared statistic: 1.549150263138376
+	- p-value: 0.4608995610789106
+	- Degrees of freedom: 2
+-------------------------------------------------- 
+
+Race:
+--------------------------------------------------
+COUNTS:
+----------
+     Group Condition                 race_final  count
+0   Belief   Control                      Asian     13
+1   Belief   Control  Black or African American     29
+2   Belief   Control       Hispanic or Latino/a     36
+3   Belief   Control                      Other     11
+4   Belief   Control                      White    152
+5   Belief    Forced                      Asian     13
+6   Belief    Forced  Black or African American     34
+7   Belief    Forced       Hispanic or Latino/a     30
+8   Belief    Forced                      Other      7
+9   Belief    Forced                      White    163
+10  Belief  Optional                      Asian      4
+11  Belief  Optional  Black or African American     36
+12  Belief  Optional       Hispanic or Latino/a     42
+13  Belief  Optional                      Other      6
+14  Belief  Optional                      White    173
+15   Share   Control                      Asian     18
+16   Share   Control  Black or African American     42
+17   Share   Control       Hispanic or Latino/a     63
+18   Share   Control                      Other      9
+19   Share   Control                      White    135
+20   Share    Forced                      Asian     18
+21   Share    Forced  Black or African American     34
+22   Share    Forced       Hispanic or Latino/a     59
+23   Share    Forced                      Other     12
+24   Share    Forced                      White    146
+25   Share  Optional                      Asian     12
+26   Share  Optional  Black or African American     32
+27   Share  Optional       Hispanic or Latino/a     38
+28   Share  Optional                      Other     15
+29   Share  Optional                      White    166 
+
+STATISTICAL DIFFERENCE BASED ON GROUP:
+----------
+Group: Belief
+Chi-squared statistic: 10.33766295166669
+p-value: 0.242121540889373
+Degrees of freedom: 8
+-------------------------------------------------- 
+
+Group: Share
+Chi-squared statistic: 14.648612495907692
+p-value: 0.06634904009831259
+Degrees of freedom: 8
+-------------------------------------------------- 
+
+Age:
+--------------------------------------------------
+COUNTS:
+----------
+     Group Condition age_bracket  count
+0   Belief   Control       18-24     21
+1   Belief   Control       25-34     53
+2   Belief   Control       35-44     44
+3   Belief   Control       45-54     39
+4   Belief   Control       55-64     38
+5   Belief   Control         65+     46
+6   Belief    Forced       18-24     29
+7   Belief    Forced       25-34     40
+8   Belief    Forced       35-44     42
+9   Belief    Forced       45-54     42
+10  Belief    Forced       55-64     47
+11  Belief    Forced         65+     47
+12  Belief  Optional       18-24     23
+13  Belief  Optional       25-34     49
+14  Belief  Optional       35-44     33
+15  Belief  Optional       45-54     37
+16  Belief  Optional       55-64     58
+17  Belief  Optional         65+     61
+18   Share   Control       18-24     31
+19   Share   Control       25-34     41
+20   Share   Control       35-44     44
+21   Share   Control       45-54     50
+22   Share   Control       55-64     38
+23   Share   Control         65+     63
+24   Share    Forced       18-24     38
+25   Share    Forced       25-34     41
+26   Share    Forced       35-44     46
+27   Share    Forced       45-54     56
+28   Share    Forced       55-64     41
+29   Share    Forced         65+     47
+30   Share  Optional       18-24     32
+31   Share  Optional       25-34     43
+32   Share  Optional       35-44     50
+33   Share  Optional       45-54     51
+34   Share  Optional       55-64     36
+35   Share  Optional         65+     51 
+
+STATISTICAL DIFFERENCE BASED ON GROUP:
+----------
+Group: Belief
+Chi-squared statistic: 11.409573574894276
+p-value: 0.3265108493280284
+Degrees of freedom: 10
+-------------------------------------------------- 
+
+Group: Share
+Chi-squared statistic: 4.5392628857697
+p-value: 0.9197594768853874
+Degrees of freedom: 10
+-------------------------------------------------- 
+
+Education:
+--------------------------------------------------
+COUNTS:
+----------
+     Group Condition edu_simple  count
+0   Belief   Control     degree    117
+1   Belief   Control  no degree    124
+2   Belief    Forced     degree    123
+3   Belief    Forced  no degree    124
+4   Belief  Optional     degree    123
+5   Belief  Optional  no degree    138
+6    Share   Control     degree    112
+7    Share   Control  no degree    155
+8    Share    Forced     degree    108
+9    Share    Forced  no degree    161
+10   Share  Optional     degree    122
+11   Share  Optional  no degree    141 
+
+STATISTICAL DIFFERENCE BASED ON GROUP:
+----------
+Group: Belief
+Chi-squared statistic: 0.3635047867098671
+p-value: 0.8338077712027212
+Degrees of freedom: 2
+-------------------------------------------------- 
+
+Group: Share
+Chi-squared statistic: 2.234444820337958
+p-value: 0.3271873258539441
+Degrees of freedom: 2
+-------------------------------------------------- 
+
+Party ID:
+--------------------------------------------------
+COUNTS:
+----------
+     Group Condition       party_id  count
+0   Belief   Control       Democrat    110
+1   Belief   Control     Don't know      1
+2   Belief   Control    Independent     14
+3   Belief   Control  No preference      2
+4   Belief   Control     Republican    114
+5   Belief    Forced       Democrat    121
+6   Belief    Forced    Independent     13
+7   Belief    Forced  No preference      4
+8   Belief    Forced          Other      1
+9   Belief    Forced     Republican    108
+10  Belief  Optional       Democrat    128
+11  Belief  Optional     Don't know      1
+12  Belief  Optional    Independent     16
+13  Belief  Optional  No preference      2
+14  Belief  Optional     Republican    114
+15   Share   Control       Democrat    130
+16   Share   Control     Don't know      2
+17   Share   Control    Independent     24
+18   Share   Control  No preference      8
+19   Share   Control          Other      2
+20   Share   Control     Republican    101
+21   Share    Forced       Democrat    128
+22   Share    Forced     Don't know      1
+23   Share    Forced    Independent     23
+24   Share    Forced  No preference      8
+25   Share    Forced          Other      1
+26   Share    Forced     Republican    108
+27   Share  Optional       Democrat    129
+28   Share  Optional    Independent     13
+29   Share  Optional  No preference      4
+30   Share  Optional     Republican    117 
+
+STATISTICAL DIFFERENCE BASED ON GROUP:
+----------
+Group: Belief
+Chi-squared statistic: 2.0835266877736007
+p-value: 0.9118585088844947
+Degrees of freedom: 6
+-------------------------------------------------- 
+
+Group: Share
+Chi-squared statistic: 6.4813818799341085
+p-value: 0.37147635458963435
+Degrees of freedom: 6
+-------------------------------------------------- 
+
