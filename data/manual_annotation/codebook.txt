@@ -1,0 +1,61 @@
+CODEBOOK OVERVIEW
+-----------------
+Last Updated: 2023-02-09T00:57:00
+
+This file contains the meaning of each column in the "__manual_annotation_vX.csv: files and their possible values.
+Note that the columns that we annotated for are derived from  Kozyreva et al.'s (2022) conceptual interventions.
+    - Paper Title: Toolbox of Interventions Against Online Misinformation and Manipulation
+    - Reference: https://doi.org/10.31234/osf.io/x8ejt
+    - Web Toolbox Reference: https://interventionstoolbox.mpib-berlin.mpg.de/table_concept.html
+
+
+COLUMNS & AND THE OPTIONS
+----------------------
+- filename: the name of the stimuli name
+    - Options: n/a
+- headline: the text of the headline within the stimuli for that file
+    - Options: n/a
+- cgpt_response: the text of ChatGPT's response to the prompt indicated within the publication
+    - Options: n/a
+- true_false_unsure: whether the coder considered ChatGPT's response to be true, false, or unsure
+    - Options: true, false, unsure
+- mentions_cutoff_date: whether the coder considered ChatGPT's response to mention the fact that it has not been trained on data after 2021 at the time the study was conducted
+    - Example: "As of my knowledge cut off, I am not aware of any recent announcements..."
+    - Options: true, false
+- is_debunk: whether the coder thought ChatGPT's response contained a debunking message
+    - Options: true, false
+- suggests_lateral_read: whether the coder thought ChatGPT's response contained a suggestion for the reader to conduct lateral reading
+    - Options: true, false
+- presents_media_literacy_tips: whether the coder thought ChatGPT's response contained any media literacy tips
+    - Options: true, false
+- rebutts_science_denialism: whether the coder thought ChatGPT's response contained any science denialism rebuttals
+    - Options: true, false
+    - Note: if this was coded as true, then `is_debunk` should also be true
+- mention_social_norms: whether the coder thought ChatGPT's response contained any mentions of social norms
+    - Options: true, false
+
+
+CONCEPTUAL DEFINITIONS
+----------------------
+Each list item represents a column within the
+
+- is_debunk
+    - Concept: Debunking
+    - Definition: Debunking provides corrective information to reduce a specific misconception or false belief.
+    - Example: Implemented in four steps: (1) state the truth, (2) warn about imminent misinformation exposure, (3) specify the misinformation and explain why it is wrong, (4) reinforce the truth by offering the correct explanation. Depending on circumstances (e.g., availability of a pithy fact), starting with step 2 is also appropriate.
+- suggests_lateral_read
+    - Concept: Lateral Reading
+    - Definition: Lateral reading is a simple heuristic for online fact-checking: Verify the credibility of information on a website by opening new tabs in your browser and searching the Web, not the original site.
+    - Example: In education, lateral reading is part of the Civic Online Reasoning Program, which teaches students how to judge the credibility of online content. Online, this intervention can take the shape of a short educational video or a pop-up on social media that shows people how to practice lateral reading.
+- presents_media_literacy_tips
+    - Concept: Media Literacy Tips
+    - Definition: Media literacy tips give people a list of strategies for identifying false and misleading information in their news feeds.
+    - Example: Facebook offers tips to spot false news, including "be sceptical of headlines," "look closely at the URL," and "investigate the source."
+- rebutts_science_denialism
+    - Concept: Rebuttals of science denialism
+    - Definition: Rebutting science denialism involves providing the facts about a topic that has been falsely addressed (topic rebuttal) or uncovering the rhetorical techniques typically used to deny science (technique rebuttal). It is a type of debunking strategy adapted to counter science denialism in public debates.
+    - Example: When a science denier argues that vaccinesshould be 100% safe, the science advocate can provide evidence of vaccines' excellent safety record (topic rebuttal) or uncover the rhetorical technique of setting impossible expectations, as no medical product can ever guarantee 100% safety (technique rebuttal).
+- mention_social_norms
+    - Concept: Social Norms
+    - Definition: Social norms leverage social information (peer influence) to encourage people not to believe, endorse, or share misinformation.
+    - Example: Emphasizing that most people (of a given group) disapprove of sharing, or using false information (descriptive norm) and/or that such actions are generally considered wrong, inappropriate, or harmful (inductive norm).

@@ -1,0 +1,327 @@
+
+########################################################################
+                        GENERAL SHARING INCREASE
+ ########################################################################
+
+Amount sharing increased between Forced and Control:
+--------------------------------------------------
+	- Mean prop. change: 0.0676
+	- Mean perc. change: 6.76%
+--------------------------------------------------
+Mann Whitney U Results:
+	- U   : 38905.5
+	- pval: 0.0938186139718021
+	- Cohen's d: 0.18423407201180883
+	- 95% CI: [0.0042, 0.1311]
+	- 95% CI (%): [0.42%, 13.11%]
+
+########################################################################
+                        CHANGES IN  DISCERNMENT
+ ########################################################################
+
+Belief:
+	- Forced - Control  : -0.0450  (-4.50%)
+	- Optional - Control: -0.0027  (-0.27%)
+Share:
+	- Forced - Control  : -0.0043  (-0.43%)
+	- Optional - Control: -0.0067  (-0.67%)
+----------
+Note: Raw and percentage values rounded to the fourth and second decimal, respectively.
+Note: See below for statistical tests.
+
+########################################################################
+                   GROUP COMPARISONS FOR DISCERNMENT
+ ########################################################################
+
+Belief ANOVA
+--------------------------------------------------
+	- Model: discernment ~ C(Condition)
+                 sum_sq     df         F    PR(>F)
+C(Condition)   0.315017    2.0  1.717114  0.180293
+Residual      68.429582  746.0       NaN       NaN 
+
+Share ANOVA
+--------------------------------------------------
+	- Model: discernment ~ C(Condition)
+                 sum_sq     df         F    PR(>F)
+C(Condition)   0.006130    2.0  0.072871  0.929727
+Residual      33.479709  796.0       NaN       NaN 
+
+CHECK ASSUMPTIONS
+--------------------------------------------------
+Checking for normality...
+------------------------- 
+
+Belief:
+	- Shapiro-Wilk Test Statistic: 0.9545618295669556
+	- Shapiro-Wilk Test p-value: 1.914586856568111e-14
+
+Share:
+	- Shapiro-Wilk Test Statistic: 0.8883247375488281
+	- Shapiro-Wilk Test p-value: 1.426555077301599e-23
+
+Checking for homoscedasticity...
+------------------------- 
+
+Belief:
+	- Levene test statistic: 0.5155063135588874
+	- Levene test p-value: 0.5974107297960454
+
+Share:
+	- Levene test statistic: 1.2262693235253532
+	- Levene test p-value: 0.293938687657097
+
+NON-PARAMETRIC ALTERNATIVES
+--------------------------------------------------
+Belief:
+-------------------------
+Kruskal-Wallis statistic: 3.1469151972079956
+Kruskal-Wallis test p-value: 0.20732708778173578
+
+Mann-Whitney U Tests
+	- Control vs Forced:
+		- Statistic: 31993.000
+		- P-value: 0.151
+		- P-value (Bonferroni corrected): 0.454
+		- Cohens d: 0.146
+		- 95% CI: [-0.0090, 0.1004]
+		- 95% CI (%): [-0.90%, 10.04%]
+	- Control vs Optional:
+		- Statistic: 31264.500
+		- P-value: 0.909
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: 0.009
+		- 95% CI: [-0.0503, 0.0552]
+		- 95% CI (%): [-5.03%, 5.52%]
+	- Forced vs Optional:
+		- Statistic: 29547.000
+		- P-value: 0.104
+		- P-value (Bonferroni corrected): 0.311
+		- Cohens d: -0.142
+		- 95% CI: [-0.0940, 0.0118]
+		- 95% CI (%): [-9.40%, 1.18%]
+Share:
+-------------------------
+Kruskal-Wallis test statistic: 0.019534790417331784
+Kruskal-Wallis test p-value: 0.990280150869552
+
+Mann-Whitney U Tests
+	- Control vs Forced:
+		- Statistic: 35784.500
+		- P-value: 0.942
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: 0.021
+		- 95% CI: [-0.0305, 0.0393]
+		- 95% CI (%): [-3.05%, 3.93%]
+	- Control vs Optional:
+		- Statistic: 34860.000
+		- P-value: 0.884
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: 0.032
+		- 95% CI: [-0.0292, 0.0418]
+		- 95% CI (%): [-2.92%, 4.18%]
+	- Forced vs Optional:
+		- Statistic: 35284.000
+		- P-value: 0.958
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: 0.012
+		- 95% CI: [-0.0306, 0.0364]
+		- 95% CI (%): [-3.06%, 3.64%]
+
+########################################################################
+                GROUP COMPARISONS FOR TRUE HEADLINES
+ ########################################################################
+
+Belief ANOVA
+--------------------------------------------------
+	- Model: prop_yes_True ~ C(Condition)
+                 sum_sq     df         F    PR(>F)
+C(Condition)   0.041318    2.0  0.399058  0.671095
+Residual      38.619664  746.0       NaN       NaN 
+
+Share ANOVA
+--------------------------------------------------
+	- Model: prop_yes_True ~ C(Condition)
+                  sum_sq     df         F    PR(>F)
+C(Condition)    0.849560    2.0  2.958791  0.052453
+Residual      114.278075  796.0       NaN       NaN 
+
+CHECK ASSUMPTIONS
+--------------------------------------------------
+Checking for normality...
+------------------------- 
+
+Belief:
+	- Shapiro-Wilk Test Statistic: 0.9552591443061829
+	- Shapiro-Wilk Test p-value: 2.5598763763574027e-14
+
+Share:
+	- Shapiro-Wilk Test Statistic: 0.8927980661392212
+	- Shapiro-Wilk Test p-value: 3.88428577962531e-23
+
+Checking for homoscedasticity...
+------------------------- 
+
+Belief:
+	- Levene test statistic: 2.6987903143288485
+	- Levene test p-value: 0.06794384042909314
+
+Share:
+	- Levene test statistic: 1.6600162900621347
+	- Levene test p-value: 0.19079341957849769
+
+NON-PARAMETRIC ALTERNATIVES
+--------------------------------------------------
+Belief:
+-------------------------
+Kruskal-Wallis statistic: 2.632025880129865
+Kruskal-Wallis test p-value: 0.26820251252804256
+
+Mann-Whitney U Tests
+	- Control vs Forced:
+		- Statistic: 32216.500
+		- P-value: 0.114
+		- P-value (Bonferroni corrected): 0.342
+		- Cohens d: 0.073
+		- 95% CI: [-0.0221, 0.0561]
+		- 95% CI (%): [-2.21%, 5.61%]
+	- Control vs Optional:
+		- Statistic: 33307.500
+		- P-value: 0.251
+		- P-value (Bonferroni corrected): 0.754
+		- Cohens d: 0.064
+		- 95% CI: [-0.0267, 0.0552]
+		- 95% CI (%): [-2.67%, 5.52%]
+	- Forced vs Optional:
+		- Statistic: 31537.000
+		- P-value: 0.673
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: -0.007
+		- 95% CI: [-0.0393, 0.0372]
+		- 95% CI (%): [-3.93%, 3.72%]
+Share:
+-------------------------
+Kruskal-Wallis test statistic: 5.325904351491742
+Kruskal-Wallis test p-value: 0.06974202681254767
+
+Mann-Whitney U Tests
+	- Control vs Forced:
+		- Statistic: 32526.500
+		- P-value: 0.058
+		- P-value (Bonferroni corrected): 0.173
+		- Cohens d: -0.175
+		- 95% CI: [-0.1298, -0.0034]
+		- 95% CI (%): [-12.98%, -0.34%]
+	- Control vs Optional:
+		- Statistic: 35813.000
+		- P-value: 0.688
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: 0.018
+		- 95% CI: [-0.0581, 0.0720]
+		- 95% CI (%): [-5.81%, 7.20%]
+	- Forced vs Optional:
+		- Statistic: 38985.000
+		- P-value: 0.040
+		- P-value (Bonferroni corrected): 0.120
+		- Cohens d: 0.187
+		- 95% CI: [0.0066, 0.1364]
+		- 95% CI (%): [0.66%, 13.64%]
+
+########################################################################
+                GROUP COMPARISONS FOR FALSE HEADLINES
+ ########################################################################
+
+Belief ANOVA
+--------------------------------------------------
+	- Model: prop_yes_False ~ C(Condition)
+                 sum_sq     df         F    PR(>F)
+C(Condition)   0.220122    2.0  0.857202  0.424765
+Residual      95.783029  746.0       NaN       NaN 
+
+Share ANOVA
+--------------------------------------------------
+	- Model: prop_yes_False ~ C(Condition)
+                  sum_sq     df         F    PR(>F)
+C(Condition)    0.868937    2.0  2.752837  0.064354
+Residual      125.629261  796.0       NaN       NaN 
+
+CHECK ASSUMPTIONS
+--------------------------------------------------
+Checking for normality...
+------------------------- 
+
+Belief:
+	- Shapiro-Wilk Test Statistic: 0.7962983846664429
+	- Shapiro-Wilk Test p-value: 1.333350339911726e-29
+
+Share:
+	- Shapiro-Wilk Test Statistic: 0.8358832597732544
+	- Shapiro-Wilk Test p-value: 7.0029846117582306e-28
+
+Checking for homoscedasticity...
+------------------------- 
+
+Belief:
+	- Levene test statistic: 1.1243341201857016
+	- Levene test p-value: 0.3254185831341668
+
+Share:
+	- Levene test statistic: 3.885244062983593
+	- Levene test p-value: 0.020933534990927292
+
+NON-PARAMETRIC ALTERNATIVES
+--------------------------------------------------
+Belief:
+-------------------------
+Kruskal-Wallis statistic: 1.8211142039588322
+Kruskal-Wallis test p-value: 0.4023000394443014
+
+Mann-Whitney U Tests
+	- Control vs Forced:
+		- Statistic: 29583.000
+		- P-value: 0.907
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: -0.078
+		- 95% CI: [-0.0946, 0.0354]
+		- 95% CI (%): [-9.46%, 3.54%]
+	- Control vs Optional:
+		- Statistic: 33197.000
+		- P-value: 0.277
+		- P-value (Bonferroni corrected): 0.832
+		- Cohens d: 0.035
+		- 95% CI: [-0.0485, 0.0766]
+		- 95% CI (%): [-4.85%, 7.66%]
+	- Forced vs Optional:
+		- Statistic: 34241.500
+		- P-value: 0.220
+		- P-value (Bonferroni corrected): 0.659
+		- Cohens d: 0.113
+		- 95% CI: [-0.0210, 0.1032]
+		- 95% CI (%): [-2.10%, 10.32%]
+Share:
+-------------------------
+Kruskal-Wallis test statistic: 4.351966356983184
+Kruskal-Wallis test p-value: 0.11349651146870421
+
+Mann-Whitney U Tests
+	- Control vs Forced:
+		- Statistic: 33610.000
+		- P-value: 0.193
+		- P-value (Bonferroni corrected): 0.578
+		- Cohens d: -0.179
+		- 95% CI: [-0.1381, -0.0044]
+		- 95% CI (%): [-13.81%, -0.44%]
+	- Control vs Optional:
+		- Statistic: 36961.000
+		- P-value: 0.284
+		- P-value (Bonferroni corrected): 0.852
+		- Cohens d: -0.000
+		- 95% CI: [-0.0674, 0.0655]
+		- 95% CI (%): [-6.74%, 6.55%]
+	- Forced vs Optional:
+		- Statistic: 38728.000
+		- P-value: 0.052
+		- P-value (Bonferroni corrected): 0.157
+		- Cohens d: 0.170
+		- 95% CI: [-0.0006, 0.1399]
+		- 95% CI (%): [-0.06%, 13.99%]

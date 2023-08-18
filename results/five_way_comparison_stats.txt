@@ -1,0 +1,312 @@
+
+Perform Mann Whitney U-tests comparing each group to the control group
+--------------------------------------------------
+
+
+Belief-Forced
+##################################################
+	- Belief: Forced True x True
+		- Mean difference (control - treated): -0.0411
+		- Mean difference (control - treated; %): -4.11%
+		- U statistic  : 28008.5
+		- p-value      : 0.2117437875640501
+		- p-value (rnd): 0.2117
+		- Cohens d(rnd): -0.1413
+		- 95% CI       : [-0.0944, 0.0118]
+		- 95% CI       : [-9.44%, 1.18%]
+	- Belief: Forced True x Unsure
+		- Mean difference (control - treated): -0.0042
+		- Mean difference (control - treated; %): -0.42%
+		- U statistic  : 30218.5
+		- p-value      : 0.768826341317842
+		- p-value (rnd): 0.7688
+		- Cohens d(rnd): -0.0179
+		- 95% CI       : [-0.0453, 0.0372]
+		- 95% CI       : [-4.53%, 3.72%]
+	- Belief: Forced True x False
+		- Mean difference (control - treated): 0.1275
+		- Mean difference (control - treated; %): 12.75%
+		- U statistic  : 35936.5
+		- p-value      : 4.7619130334684356e-05
+		- p-value (rnd): 0.0000
+		- Cohens d(rnd): 0.3761
+		- 95% CI       : [0.0689, 0.1867]
+		- 95% CI       : [6.89%, 18.67%]
+	- Belief: Forced False x Unsure
+		- Mean difference (control - treated): -0.0912
+		- Mean difference (control - treated; %): -9.12%
+		- U statistic  : 25930.5
+		- p-value      : 0.0073866255168187475
+		- p-value (rnd): 0.0074
+		- Cohens d(rnd): -0.2203
+		- 95% CI       : [-0.1635, -0.0169]
+		- 95% CI       : [-16.35%, -1.69%]
+	- Belief: Forced False x False
+		- Mean difference (control - treated): -0.0214
+		- Mean difference (control - treated; %): -2.14%
+		- U statistic  : 30771.0
+		- p-value      : 0.5116509736180657
+		- p-value (rnd): 0.5117
+		- Cohens d(rnd): -0.0580
+		- 95% CI       : [-0.0866, 0.0428]
+		- 95% CI       : [-8.66%, 4.28%]
+
+Adjusting p-values (via bonferroni method)...
+
+Significant Comparisons:
+--------------------------------------------------
+	 Belief-Control-Forced-True-False
+		 pvalue_adjusted      : 0.00023809565167342179
+		 pvalue_adjusted (rnd): 0.0002
+		 statistic      : 35936.5
+	 Belief-Control-Forced-False-Unsure
+		 pvalue_adjusted      : 0.02954650206727499
+		 pvalue_adjusted (rnd): 0.0295
+		 statistic      : 25930.5
+
+Non-significant Comparisons:
+--------------------------------------------------
+	 Belief-Control-Forced-True-True
+		 pvalue_adjusted      : 0.6352313626921503
+		 pvalue_adjusted (rnd): 0.6352
+		 statistic      : 28008.5
+	 Belief-Control-Forced-True-Unsure
+		 pvalue_adjusted      : 1.0
+		 pvalue_adjusted (rnd): 1.0000
+		 statistic      : 30218.5
+	 Belief-Control-Forced-False-False
+		 pvalue_adjusted      : 1.0
+		 pvalue_adjusted (rnd): 1.0000
+		 statistic      : 30771.0
+
+
+Belief-Optional
+##################################################
+	- Belief: Optional True x True
+		- Mean difference (control - treated): -0.0522
+		- Mean difference (control - treated; %): -5.22%
+		- U statistic  : 28870.0
+		- p-value      : 0.07644932716733699
+		- p-value (rnd): 0.0764
+		- Cohens d(rnd): -0.1797
+		- 95% CI       : [-0.1027, -0.0024]
+		- 95% CI       : [-10.27%, -0.24%]
+	- Belief: Optional True x Unsure
+		- Mean difference (control - treated): -0.0007
+		- Mean difference (control - treated; %): -0.07%
+		- U statistic  : 31658.0
+		- p-value      : 0.8978680253911766
+		- p-value (rnd): 0.8979
+		- Cohens d(rnd): -0.0028
+		- 95% CI       : [-0.0436, 0.0417]
+		- 95% CI       : [-4.36%, 4.17%]
+	- Belief: Optional True x False
+		- Mean difference (control - treated): 0.1170
+		- Mean difference (control - treated; %): 11.70%
+		- U statistic  : 37266.0
+		- p-value      : 0.00023575916738355964
+		- p-value (rnd): 0.0002
+		- Cohens d(rnd): 0.3410
+		- 95% CI       : [0.0572, 0.1764]
+		- 95% CI       : [5.72%, 17.64%]
+	- Belief: Optional False x Unsure
+		- Mean difference (control - treated): -0.0571
+		- Mean difference (control - treated; %): -5.71%
+		- U statistic  : 28924.5
+		- p-value      : 0.0870997090680861
+		- p-value (rnd): 0.0871
+		- Cohens d(rnd): -0.1369
+		- 95% CI       : [-0.1289, 0.0160]
+		- 95% CI       : [-12.89%, 1.60%]
+	- Belief: Optional False x False
+		- Mean difference (control - treated): 0.0201
+		- Mean difference (control - treated; %): 2.01%
+		- U statistic  : 34437.5
+		- p-value      : 0.061517799588735766
+		- p-value (rnd): 0.0615
+		- Cohens d(rnd): 0.0564
+		- 95% CI       : [-0.0403, 0.0819]
+		- 95% CI       : [-4.03%, 8.19%]
+
+Adjusting p-values (via bonferroni method)...
+
+Significant Comparisons:
+--------------------------------------------------
+	 Belief-Control-Optional-True-False
+		 pvalue_adjusted      : 0.0011787958369177981
+		 pvalue_adjusted (rnd): 0.0012
+		 statistic      : 37266.0
+
+Non-significant Comparisons:
+--------------------------------------------------
+	 Belief-Control-Optional-True-True
+		 pvalue_adjusted      : 0.24607119835494307
+		 pvalue_adjusted (rnd): 0.2461
+		 statistic      : 28870.0
+	 Belief-Control-Optional-True-Unsure
+		 pvalue_adjusted      : 0.8978680253911766
+		 pvalue_adjusted (rnd): 0.8979
+		 statistic      : 31658.0
+	 Belief-Control-Optional-False-Unsure
+		 pvalue_adjusted      : 0.24607119835494307
+		 pvalue_adjusted (rnd): 0.2461
+		 statistic      : 28924.5
+	 Belief-Control-Optional-False-False
+		 pvalue_adjusted      : 0.24607119835494307
+		 pvalue_adjusted (rnd): 0.2461
+		 statistic      : 34437.5
+
+
+Share-Forced
+##################################################
+	- Share: Forced True x True
+		- Mean difference (control - treated): -0.1109
+		- Mean difference (control - treated; %): -11.09%
+		- U statistic  : 30897.0
+		- p-value      : 0.003380335639257913
+		- p-value (rnd): 0.0034
+		- Cohens d(rnd): -0.2643
+		- 95% CI       : [-0.1806, -0.0402]
+		- 95% CI       : [-18.06%, -4.02%]
+	- Share: Forced True x Unsure
+		- Mean difference (control - treated): -0.0643
+		- Mean difference (control - treated; %): -6.43%
+		- U statistic  : 32635.5
+		- p-value      : 0.06554813273954674
+		- p-value (rnd): 0.0655
+		- Cohens d(rnd): -0.1705
+		- 95% CI       : [-0.1289, -0.0021]
+		- 95% CI       : [-12.89%, -0.21%]
+	- Share: Forced True x False
+		- Mean difference (control - treated): -0.0349
+		- Mean difference (control - treated; %): -3.49%
+		- U statistic  : 34176.5
+		- p-value      : 0.31524444867000845
+		- p-value (rnd): 0.3152
+		- Cohens d(rnd): -0.0848
+		- 95% CI       : [-0.1038, 0.0332]
+		- 95% CI       : [-10.38%, 3.32%]
+	- Share: Forced False x Unsure
+		- Mean difference (control - treated): -0.0977
+		- Mean difference (control - treated; %): -9.77%
+		- U statistic  : 31855.5
+		- p-value      : 0.012810162935511347
+		- p-value (rnd): 0.0128
+		- Cohens d(rnd): -0.2197
+		- 95% CI       : [-0.1725, -0.0231]
+		- 95% CI       : [-17.25%, -2.31%]
+	- Share: Forced False x False
+		- Mean difference (control - treated): -0.0667
+		- Mean difference (control - treated; %): -6.67%
+		- U statistic  : 33986.0
+		- p-value      : 0.27426787541670383
+		- p-value (rnd): 0.2743
+		- Cohens d(rnd): -0.1703
+		- 95% CI       : [-0.1332, 0.0011]
+		- 95% CI       : [-13.32%, 0.11%]
+
+Adjusting p-values (via bonferroni method)...
+
+Significant Comparisons:
+--------------------------------------------------
+	 Share-Control-Forced-True-True
+		 pvalue_adjusted      : 0.016901678196289564
+		 pvalue_adjusted (rnd): 0.0169
+		 statistic      : 30897.0
+
+Non-significant Comparisons:
+--------------------------------------------------
+	 Share-Control-Forced-True-Unsure
+		 pvalue_adjusted      : 0.19664439821864022
+		 pvalue_adjusted (rnd): 0.1966
+		 statistic      : 32635.5
+	 Share-Control-Forced-True-False
+		 pvalue_adjusted      : 0.5485357508334077
+		 pvalue_adjusted (rnd): 0.5485
+		 statistic      : 34176.5
+	 Share-Control-Forced-False-Unsure
+		 pvalue_adjusted      : 0.05124065174204539
+		 pvalue_adjusted (rnd): 0.0512
+		 statistic      : 31855.5
+	 Share-Control-Forced-False-False
+		 pvalue_adjusted      : 0.5485357508334077
+		 pvalue_adjusted (rnd): 0.5485
+		 statistic      : 33986.0
+
+
+Share-Optional
+##################################################
+	- Share: Optional True x True
+		- Mean difference (control - treated): -0.0481
+		- Mean difference (control - treated; %): -4.81%
+		- U statistic  : 33124.0
+		- p-value      : 0.23728435534287673
+		- p-value (rnd): 0.2373
+		- Cohens d(rnd): -0.1160
+		- 95% CI       : [-0.1183, 0.0227]
+		- 95% CI       : [-11.83%, 2.27%]
+	- Share: Optional True x Unsure
+		- Mean difference (control - treated): 0.0082
+		- Mean difference (control - treated; %): 0.82%
+		- U statistic  : 35996.5
+		- p-value      : 0.6117952306992915
+		- p-value (rnd): 0.6118
+		- Cohens d(rnd): 0.0214
+		- 95% CI       : [-0.0568, 0.0696]
+		- 95% CI       : [-5.68%, 6.96%]
+	- Share: Optional True x False
+		- Mean difference (control - treated): 0.0429
+		- Mean difference (control - treated; %): 4.29%
+		- U statistic  : 37479.5
+		- p-value      : 0.15849040788463176
+		- p-value (rnd): 0.1585
+		- Cohens d(rnd): 0.1043
+		- 95% CI       : [-0.0273, 0.1100]
+		- 95% CI       : [-2.73%, 11.00%]
+	- Share: Optional False x Unsure
+		- Mean difference (control - treated): -0.0282
+		- Mean difference (control - treated; %): -2.82%
+		- U statistic  : 34057.5
+		- p-value      : 0.5052171347614589
+		- p-value (rnd): 0.5052
+		- Cohens d(rnd): -0.0641
+		- 95% CI       : [-0.1038, 0.0475]
+		- 95% CI       : [-10.38%, 4.75%]
+	- Share: Optional False x False
+		- Mean difference (control - treated): 0.0031
+		- Mean difference (control - treated; %): 0.31%
+		- U statistic  : 37184.0
+		- p-value      : 0.22864002988201326
+		- p-value (rnd): 0.2286
+		- Cohens d(rnd): 0.0079
+		- 95% CI       : [-0.0619, 0.0699]
+		- 95% CI       : [-6.19%, 6.99%]
+
+Adjusting p-values (via bonferroni method)...
+
+Significant Comparisons:
+--------------------------------------------------
+	 No significant comparisons
+
+Non-significant Comparisons:
+--------------------------------------------------
+	 Share-Control-Optional-True-True
+		 pvalue_adjusted      : 0.914560119528053
+		 pvalue_adjusted (rnd): 0.9146
+		 statistic      : 33124.0
+	 Share-Control-Optional-True-Unsure
+		 pvalue_adjusted      : 1.0
+		 pvalue_adjusted (rnd): 1.0000
+		 statistic      : 35996.5
+	 Share-Control-Optional-True-False
+		 pvalue_adjusted      : 0.7924520394231588
+		 pvalue_adjusted (rnd): 0.7925
+		 statistic      : 37479.5
+	 Share-Control-Optional-False-Unsure
+		 pvalue_adjusted      : 1.0
+		 pvalue_adjusted (rnd): 1.0000
+		 statistic      : 34057.5
+	 Share-Control-Optional-False-False
+		 pvalue_adjusted      : 0.914560119528053
+		 pvalue_adjusted (rnd): 0.9146
+		 statistic      : 37184.0
