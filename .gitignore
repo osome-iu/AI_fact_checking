@@ -1,0 +1,10 @@
+# Mac stuff
+.DS_Store
+
+# Python stuff
+__pycache__
+.ipynb_checkpoints
+
+# Handle vscode
+.vscode/
+*.Rhistory
