@@ -32,8 +32,10 @@ DATA_CLEANING_DIR = "../data_cleaning"
 sys.path.insert(0, DATA_CLEANING_DIR)
 # Imports the names of columns in the loaded data by each section of the study
 from db import find_file
+from bonferroni import bonferroni_correction
 
 DATA_DIR = "../../data/cleaned_data/"
+# FNAME = find_file(DATA_DIR, "*long_form.parquet")
 FNAME = find_file(DATA_DIR, "*long_form_cgpt_fc_paper.parquet")
 
 DATA_DIR = "../../results/"
@@ -41,23 +43,6 @@ DISCERNMENT_FNAME = "discernment_df_main_groups_only.csv"
 ROOT_DIR = "data_analysis"
 
 GROUP_NAMES = ["Control", "Forced", "Optional"]
-
-
-def bonferroni_correction(p_value, n_comparisons):
-    """
-    Perform Bonferroni correction on a given p-value for multiple comparisons.
-    Parameters:
-    -----------
-    - p_value (float): The original p-value.
-    - n_comparisons (int): The number of comparisons being made.
-    Returns:
-    -----------
-    - float: The Bonferroni corrected p-value.
-    """
-    bonferroni_corrected_p_value = p_value * n_comparisons
-    # Ensure the corrected p-value is not greater than 1
-    bonferroni_corrected_p_value = min(1.0, bonferroni_corrected_p_value)
-    return bonferroni_corrected_p_value
 
 
 if __name__ == "__main__":

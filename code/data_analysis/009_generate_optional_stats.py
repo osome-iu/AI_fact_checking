@@ -23,7 +23,9 @@ from scipy.stats import mannwhitneyu
 
 from effect_size import cohen_d
 from boot import mean_diff_bootstrap_ci
+from bonferroni import bonferroni_correction
 
+NUM_COMPARISONS = 4
 ROOT_DIR = "data_analysis"
 if __name__ == "__main__":
     # Ensure we are in the data_analysis directory for paths to work
@@ -105,10 +107,17 @@ for group in ["Belief", "Share"]:
 print("\nSTATS")
 print("-" * 50)
 for group_veracity, results_dict in results_dict.items():
-    print(f"\t{group_veracity[0]}: {group_veracity[1]}")
-    print(f"\t\t- pval      : {results_dict['mwu'].pvalue}")
-    print(f"\t\t- U         : {results_dict['mwu'].statistic}")
-    print(f"\t\t- Cohen's d : {results_dict['cohensd']:.4f}")
+    pval = results_dict["mwu"].pvalue
+    pval_corrected = bonferroni_correction(pval, NUM_COMPARISONS)
+    ustat = results_dict["mwu"].statistic
+    cohensd = results_dict["cohensd"]
     lowci, highci = results_dict["ci"]
-    print(f"\t\t- 95% CI    : [{lowci:.4f}, {highci:.4f}]")
-    print(f"\t\t- 95% CI (%): [{lowci:.2%}, {highci:.2%}]")
+
+    print(f"\t{group_veracity[0]} : {group_veracity[1]}")
+    print(f"\t\t- pval             : {pval}")
+    print(f"\t\t- pval (corrected) : {pval_corrected:}")
+    print(f"\t\t- pval (corr, rnd) : {pval_corrected:.4f}")
+    print(f"\t\t- U                : {ustat}")
+    print(f"\t\t- Cohen's d        : {cohensd:.4f}")
+    print(f"\t\t- 95% CI           : [{lowci:.4f}, {highci:.4f}]")
+    print(f"\t\t- 95% CI (%)       : [{lowci:.2%}, {highci:.2%}]")
