@@ -1,7 +1,7 @@
 # Artificial intelligence is ineffective and potentially harmful for fact checking
 
 ## Paper
-For more details, you can find the paper [here]. It should be cited as:
+For more details, you can find the paper [here](https://doi.org/10.48550/arXiv.2308.10800). It should be cited as:
 - [Matthew R. DeVerna](https://www.matthewdeverna.com/), [Harry Yaojun Yan](https://cns-nrt.indiana.edu/students/trainees/2018/Harry-Yaojun-Yan.html), [Kai-Cheng Yang](https://www.kaichengyang.me/), [Filippo Menczer](https://cnets.indiana.edu/fil/) (2023). **Artificial intelligence is ineffective and potentially harmful for fact checking**, ArXiv preprint:2308.10800. doi: https://doi.org/10.48550/arXiv.2308.10800
 
 ```bib
