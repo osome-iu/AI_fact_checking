@@ -446,7 +446,7 @@ legend2 = fig.legend(
 
 # fig.tight_layout()
 
-ax_map[1].text(0.82, 1.34, "AI judgment", transform=ax_map[1].transAxes)
+ax_map[1].text(0.79, 1.34, "LLM judgment", transform=ax_map[1].transAxes)
 
 
 plt.subplots_adjust(hspace=0.2, wspace=0.38, right=0.95)

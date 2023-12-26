@@ -248,7 +248,7 @@ ax[(1, 0)].set_xlim((0, 0.3))
 
 # Add supxlabel
 supx = fig.supxlabel(
-    "      AI judgment", fontweight="bold", ha="center", va="bottom", fontsize=16
+    "      LLM judgment", fontweight="bold", ha="center", va="bottom", fontsize=16
 )
 fig.suptitle(" ")
 
