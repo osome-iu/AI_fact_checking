@@ -1,0 +1,384 @@
+---
+title: "2024_07_25_interactions_atai"
+date: "2024_07_25"
+output: 
+  html_document:
+    toc: true
+    toc_float:
+      toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    theme: lumen
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(comment=NA, prompt=FALSE, cache=FALSE, echo=TRUE, results = "html")
+library(psych)
+#library(lme4)
+library(ggplot2)
+library(sjPlot)
+library(ggeffects)
+library(arrow)
+library(ggpubr)
+library(tidyverse)
+#library(miceadds)
+library(sandwich)
+library(lmtest)
+library(emmeans)
+library(dplyr)
+```
+
+```{r load_data ,warning=FALSE, echo = FALSE}
+data_root <- "../data"
+data <- read_parquet(file.path(data_root, "cleaned_data", "2024-07-01_long_form_cgpt_fc_paper.parquet"))
+```
+
+```{r recode, echo = FALSE}
+# Recode for regression
+data$exp_response <-ifelse(data$exp_response == TRUE, 1, 0)
+data$veracity<-as.factor(data$veracity)
+data$Condition<-as.factor(data$Condition)
+data$option_cond <-as.factor(data$option_cond)
+data$congruency <-as.factor(data$congruency)
+data$ano_true_false_unsure <-as.factor(data$ano_true_false_unsure)
+data$congruency <-ifelse(data$congruency == "incongruent", 1, 0)
+
+data$age <- ifelse(data$Condition == "Human-FC", 2024 - data$year_birth, 2023 - data$year_birth)
+data$age_recode <- data$age/10
+
+# Captures the five headline scenarios observed in our data
+data<- data %>% mutate(
+  cGPT_accuracy_recode = case_when(
+    veracity == TRUE & ano_true_false_unsure == "false" ~ "True_false",
+    veracity == FALSE & ano_true_false_unsure == "false" ~ "False_false",
+    veracity == TRUE & ano_true_false_unsure == "unsure" ~ "True_unsure",
+    veracity == FALSE & ano_true_false_unsure == "unsure" ~ "False_unsure",
+    veracity == TRUE & ano_true_false_unsure == "true" ~ "True_true",
+  ))
+
+# data$cGPT_accuracy_recode <-as.factor(data$cGPT_accuracy_recode)
+
+data = data[,c("exp_response", "Group", "veracity", "Condition", "option_cond", "congruency", "cGPT_accuracy_recode", "age", "edu_recoded", "ResponseId", "qualtrics_question_num", "AI_att_mean", "ano_true_false_unsure")]
+
+# Split belief and share datasets
+belief_data <- subset(data, data$Group == "Belief")
+share_data <- subset(data, data$Group == "Share")
+
+# Create version WITHOUT human FC participants
+belief_data_no_hfc <- belief_data[belief_data$Condition != "Human-FC",]
+share_data_no_hfc <- share_data[share_data$Condition != "Human-FC",]
+
+# Create version WITHOUT optional or human FC participants
+belief_data_no_opt_or_hfc <- belief_data[belief_data$Condition != "Optional" & belief_data$Condition != "Human-FC",]
+share_data_no_opt_or_hfc <- share_data[share_data$Condition != "Optional" & share_data$Condition != "Human-FC",]
+
+# Create version with ONLY optional participants
+belief_data_opt<- belief_data[belief_data$Condition == "Optional",]
+share_data_opt<- share_data[share_data$Condition == "Optional",]
+```
+
+
+
+## Note: 
+- The post hoc estimates are printed before conducting pairwise comparison
+- Clustered standard errors were included for pairwise comparison. 
+
+
+## Contents:
+- [Interactions]
+	- [Attitude towards AI (ATAI)]
+		- [Set equations (ATAI)]
+		- [Main effects w. ATAI: Belief]
+		- [Main effects w. ATAI: Share]
+		- [Accounting for AI judgement w. ATAI: Belief]
+		- [Accounting for AI judgement w. ATAI: Share]
+		- [Optional w. ATAI: Belief]
+		- [Optional w. ATAI: Share]
+
+## Set all pairs of interest utilized throughout the code
+```{r POI}
+five_way_contrasts <- list(
+	c("Forced_False_false", "Control_False_false"),
+	c("Forced_False_unsure", "Control_False_unsure"),
+	c("Forced_True_false", "Control_True_false"),
+	c("Forced_True_unsure", "Control_True_unsure"),
+	c("Forced_True_true", "Control_True_true")
+)
+
+optional_contrasts <- list(
+  c("Opt_in_False_false", "Opt_out_False_false"),
+  c("Opt_in_False_unsure", "Opt_out_False_unsure"),
+  c("Opt_in_True_false", "Opt_out_True_false"),
+  c("Opt_in_True_true", "Opt_out_True_true"),
+  c("Opt_in_True_unsure", "Opt_out_True_unsure")
+)
+```
+
+## Define function to print model stats
+```{r p_func}
+# Define function to extract overall p-value of model
+model_p <- function(model_summary) {
+    f <- model_summary$fstatistic
+	p <- pf(f[1],f[2],f[3],lower.tail=F)
+    attributes(p) <- NULL # Ensures the value is numeric
+    if (p == 0) {
+        p <- "< 2.2e-16"
+    }
+    return(p)
+}
+
+print_summary <- function(model) {
+	model_summary <- summary(model)
+	f_statistic <- model_summary$fstatistic[1]
+	cat("F statistic:", f_statistic, "\n")
+	
+	df_residual <- model_summary$df[2]
+	cat("Degrees of freedom (residuals):", df_residual, "\n")
+	
+	p_value <- model_p(model_summary)
+	cat("P-value:", p_value, "\n")
+	
+	r2 <- model_summary$r.squared
+	cat("R-squared:", r2, "\n")
+	
+	r2adj <- model_summary$adj.r.squared
+	cat("Adjusted R-squared:", r2adj, "\n")
+}
+
+generate_contrast_vector <- function(pairs, levels) {
+  # Initialize a zero vector of length equal to the number of levels
+  contrast_vector <- rep(0, length(levels))
+  
+  # Find the indices of the pairs in the levels
+  idx1 <- which(levels == pairs[1])
+  idx2 <- which(levels == pairs[2])
+  
+  # Set the values in the contrast vector
+  contrast_vector[idx1] <- 1
+  contrast_vector[idx2] <- -1
+  
+  return(contrast_vector)
+}
+```
+
+
+# Interactions
+
+## Attitude towards AI (ATAI)
+
+### Set equations (ATAI)
+```{r set_equations_int_atai}
+me_w_atai_formula = exp_response ~ Condition*veracity*AI_att_mean + age + edu_recoded
+five_way_atai_formula = exp_response ~ Condition*cGPT_accuracy_recode*AI_att_mean + age + edu_recoded
+optional_atai_formula = exp_response ~ option_cond*cGPT_accuracy_recode*AI_att_mean + age + edu_recoded
+```
+
+### Main effects w. ATAI: Belief
+```{r me_atai_int_belief}
+# We exclude the human fact checking condition here because there is no AI aspect of that experiment
+mb_me_atai <- lm(me_w_atai_formula, data = belief_data_no_hfc)
+
+print_summary(mb_me_atai)
+
+clustered_se <- vcovCL(mb_me_atai, cluster = belief_data_no_hfc[, c("ResponseId", "qualtrics_question_num")])
+round(coeftest(mb_me_atai, vcov = clustered_se),3)
+```
+
+### Main effects w. ATAI: Share
+
+```{r me_atai_int_share}
+# We exclude the human fact checking condition here because there is no AI aspect of that experiment
+ms_me_atai <- lm(me_w_atai_formula, data = share_data_no_hfc)
+
+print_summary(ms_me_atai)
+
+clustered_se <- vcovCL(ms_me_atai, cluster = share_data_no_hfc[, c("ResponseId", "qualtrics_question_num")])
+round(coeftest(ms_me_atai, vcov = clustered_se),3)
+```
+
+### Accounting for AI judgement w. ATAI: Belief
+
+#### Fit regression model
+```{r AI_judgement_atai_belief}
+mb_ai_atai <- lm(five_way_atai_formula, data = belief_data_no_opt_or_hfc)
+
+print_summary(mb_ai_atai)
+
+clustered_se <- vcovCL(mb_ai_atai, cluster = belief_data_no_opt_or_hfc[, c("ResponseId", "qualtrics_question_num")])
+round(coeftest(mb_ai_atai, vcov = clustered_se),3)
+```
+
+#### Post-hoc test
+
+```{r AI_judgement_atai_post_belief}
+# Generate the estimated marginal means
+test <- emtrends(mb_ai_atai, ~ Condition*cGPT_accuracy_recode, var="AI_att_mean", infer =TRUE)
+test
+
+# Extract the summary data frame from the emmGrid object
+test_df <- summary(test)
+
+# Create a vector of all combinations
+temp_levels <- paste(test_df$Condition, test_df$cGPT_accuracy_recode, sep = "_")
+
+# Create and name the contrast_list
+contrast_list <- lapply(five_way_contrasts, generate_contrast_vector, levels = temp_levels)
+names(contrast_list) <- sapply(five_way_contrasts, function(p) paste(p[1], "-", p[2]))
+
+# Perform the specified pairwise comparisons using the generated contrast list
+pairwise <- contrast(test, method = contrast_list, adjust = "bonferroni", infer = c(TRUE, TRUE))
+
+# Convert the results to a data frame
+ph_belief <- as.data.frame(pairwise)
+
+# Round all numeric columns to three decimal places
+ph_belief_rounded <- ph_belief
+numeric_columns <- sapply(ph_belief, is.numeric)  # Identify numeric columns
+ph_belief_rounded[numeric_columns] <- round(ph_belief[numeric_columns], 3)
+
+# Print the rounded results
+print(ph_belief_rounded)
+
+plot_model(mb_ai_atai, type  = "pred", terms =  c( "AI_att_mean", "Condition",  "cGPT_accuracy_recode"), title = "Moderating effects of ATAI") + ylab("Believed") + theme_minimal()
+```
+
+### Accounting for AI judgement w. ATAI: Share
+
+#### Fit regression model
+```{r AI_judgement_atai_share}
+ms_ai_atai <- lm(five_way_atai_formula, data = share_data_no_opt_or_hfc)
+
+print_summary(ms_ai_atai)
+
+clustered_se <- vcovCL(ms_ai_atai, cluster = share_data_no_opt_or_hfc[, c("ResponseId", "qualtrics_question_num")])
+round(coeftest(ms_ai_atai, vcov = clustered_se),3)
+```
+
+#### Post-hoc test
+
+```{r AI_judgement_atai_post_share}
+# Generate the estimated marginal means
+test <- emtrends(ms_ai_atai, ~ Condition*cGPT_accuracy_recode, var="AI_att_mean", infer = TRUE)
+test
+
+# Extract the summary data frame from the emmGrid object
+test_df <- summary(test)
+
+# Create a vector of all combinations
+temp_levels <- paste(test_df$Condition, test_df$cGPT_accuracy_recode, sep = "_")
+
+# Create and name the contrast_list
+contrast_list <- lapply(five_way_contrasts, generate_contrast_vector, levels = temp_levels)
+names(contrast_list) <- sapply(five_way_contrasts, function(p) paste(p[1], "-", p[2]))
+
+# Perform the specified pairwise comparisons using the generated contrast list
+pairwise <- contrast(test, method = contrast_list, adjust = "bonferroni", infer = c(TRUE, TRUE))
+
+# Convert the results to a data frame
+ph_share <- as.data.frame(pairwise)
+
+# Round all numeric columns to three decimal places
+ph_share_rounded <- ph_share
+numeric_columns <- sapply(ph_share, is.numeric)  # Identify numeric columns
+ph_share_rounded[numeric_columns] <- round(ph_share[numeric_columns], 3)
+
+# Print the rounded results
+print(ph_share_rounded)
+
+plot_model(ms_ai_atai, type  = "pred", terms =  c( "AI_att_mean", "Condition",  "cGPT_accuracy_recode"), title = "Moderating effects of ATAI") + ylab("Believed") + theme_minimal()
+```
+
+### Optional w. ATAI: Belief
+
+#### Fit regression model
+```{r optional_atai_belief}
+mb_opt_atai <- lm(optional_atai_formula, data = belief_data_opt)
+
+print_summary(mb_opt_atai)
+
+clustered_se <- vcovCL(mb_opt_atai, cluster = belief_data_opt[, c("ResponseId", "qualtrics_question_num")]) 
+round(coeftest(mb_opt_atai, vcov = clustered_se),3)
+```
+
+#### Post-hoc test
+
+```{r optional_atai_post_belief}
+# Generate the estimated marginal means
+test <- emtrends(mb_opt_atai, ~ option_cond*cGPT_accuracy_recode, var="AI_att_mean", infer = TRUE)
+test
+
+# Extract the summary data frame from the emmGrid object
+test_df <- summary(test)
+
+# Create a vector of all combinations
+temp_levels <- paste(test_df$option_cond, test_df$cGPT_accuracy_recode, sep = "_")
+
+# Create and name the contrast_list
+contrast_list <- lapply(optional_contrasts, generate_contrast_vector, levels = temp_levels)
+names(contrast_list) <- sapply(optional_contrasts, function(p) paste(p[1], "-", p[2]))
+
+# Perform the specified pairwise comparisons using the generated contrast list
+pairwise <- contrast(test, method = contrast_list, adjust = "bonferroni", infer = c(TRUE, TRUE))
+
+# Convert the results to a data frame
+ph_belief <- as.data.frame(pairwise)
+
+# Round all numeric columns to three decimal places
+ph_belief_rounded <- ph_belief
+numeric_columns <- sapply(ph_belief, is.numeric)  # Identify numeric columns
+ph_belief_rounded[numeric_columns] <- round(ph_belief[numeric_columns], 3)
+
+# Print the rounded results
+print(ph_belief_rounded)
+
+plot_model(mb_opt_atai, type  = "pred", terms =  c( "AI_att_mean", "option_cond",  "cGPT_accuracy_recode"), title = "Moderating effects of ATAI") + ylab("Believed") + theme_minimal()
+```
+
+### Optional w. ATAI: Share
+
+#### Fit regression model
+```{r optional_atai_share}
+ms_ai_atai <- lm(optional_atai_formula, data = share_data_opt )
+
+print_summary(ms_ai_atai)
+
+clustered_se <- vcovCL(ms_ai_atai, cluster = share_data_opt[, c("ResponseId", "qualtrics_question_num")]) 
+round(coeftest(ms_ai_atai, vcov = clustered_se),3)
+
+```
+
+#### Post-hoc test
+
+```{r optional_atai_post_share}
+# Generate the estimated marginal means
+test <- emtrends(ms_ai_atai, ~ option_cond*cGPT_accuracy_recode, var="AI_att_mean", infer = TRUE)
+test
+
+# Extract the summary data frame from the emmGrid object
+test_df <- summary(test)
+
+# Create a vector of all combinations
+temp_levels <- paste(test_df$option_cond, test_df$cGPT_accuracy_recode, sep = "_")
+
+# Create and name the contrast_list
+contrast_list <- lapply(optional_contrasts, generate_contrast_vector, levels = temp_levels)
+names(contrast_list) <- sapply(optional_contrasts, function(p) paste(p[1], "-", p[2]))
+
+# Perform the specified pairwise comparisons using the generated contrast list
+pairwise <- contrast(test, method = contrast_list, adjust = "bonferroni", infer = c(TRUE, TRUE))
+
+# Convert the results to a data frame
+ph_share <- as.data.frame(pairwise)
+
+# Round all numeric columns to three decimal places
+ph_share_rounded <- ph_share
+numeric_columns <- sapply(ph_share, is.numeric)  # Identify numeric columns
+ph_share_rounded[numeric_columns] <- round(ph_share[numeric_columns], 3)
+
+# Print the rounded results
+print(ph_share_rounded)
+
+plot_model(ms_ai_atai, type  = "pred", terms =  c( "AI_att_mean", "option_cond",  "cGPT_accuracy_recode"), title = "Moderating effects of ATAI") + ylab("Intention to share") + theme_minimal()
+```
+
