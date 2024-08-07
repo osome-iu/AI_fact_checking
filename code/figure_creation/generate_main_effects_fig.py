@@ -11,6 +11,7 @@ Outputs:
 
 Author: Matthew DeVerna
 """
+
 import os
 import sys
 
@@ -21,7 +22,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import matplotlib.gridspec as gridspec
 
-plt.rcParams.update({"font.size": 16})
+plt.rcParams.update({"font.size": 14})
 
 ROOT_DIR = "figure_creation"
 # Ensure we are in the data_cleaning directory for paths to work
@@ -32,7 +33,7 @@ if os.path.basename(os.getcwd()) != ROOT_DIR:
 from plot_utils import darken_hexcode
 
 # Constants
-FONT_SIZE = 16
+FONT_SIZE = 14
 FIGURES_DIR = "../../figures"
 DATA_PATH = "../../results/discernment_df_main_groups_only_w_veracity.csv"
 
@@ -80,6 +81,7 @@ mg_belief_dict = {
     "Control": {True: {"mean": 0, "ci": 0}, False: {"mean": 0, "ci": 0}},
     "Forced": {True: {"mean": 0, "ci": 0}, False: {"mean": 0, "ci": 0}},
     "Optional": {True: {"mean": 0, "ci": 0}, False: {"mean": 0, "ci": 0}},
+    "Human-FC": {True: {"mean": 0, "ci": 0}, False: {"mean": 0, "ci": 0}},
 }
 
 for v_opt in belief_group.veracity.unique():
@@ -100,6 +102,7 @@ mg_sharing_dict = {
     "Control": {True: {"mean": 0, "ci": 0}, False: {"mean": 0, "ci": 0}},
     "Forced": {True: {"mean": 0, "ci": 0}, False: {"mean": 0, "ci": 0}},
     "Optional": {True: {"mean": 0, "ci": 0}, False: {"mean": 0, "ci": 0}},
+    "Human-FC": {True: {"mean": 0, "ci": 0}, False: {"mean": 0, "ci": 0}},
 }
 
 for v_opt in sharing_group.veracity.unique():
@@ -325,15 +328,15 @@ for x in range(2, 4):
 # Figure wide parameters
 alpha = 0.95
 offset = 0.2
-base_x_vals = np.array([0, 0.7, 1.4])
+base_x_vals = np.array([0, 0.7, 1.4, 2.1])
 anno_buffer = 0.15
 anno_width = 0.02
-capsize = 3
+capsize = 0
 y_reduce = 0.2
 
 # Slices
 groups = ["mg_belief", "mg_sharing"]
-conditions = ["Control", "Forced", "Optional"]
+conditions = ["Control", "Forced", "Optional", "Human-FC"]
 veracity_options = [True, False]
 
 for plot_idx, group in enumerate(groups, start=2):
@@ -346,11 +349,13 @@ for plot_idx, group in enumerate(groups, start=2):
                 eval(f"{group}_dict['Control'][veracity]['mean']"),
                 eval(f"{group}_dict['Forced'][veracity]['mean']"),
                 eval(f"{group}_dict['Optional'][veracity]['mean']"),
+                eval(f"{group}_dict['Human-FC'][veracity]['mean']"),
             ],
             yerr=[
                 eval(f"{group}_dict['Control'][veracity]['ci']"),
                 eval(f"{group}_dict['Forced'][veracity]['ci']"),
                 eval(f"{group}_dict['Optional'][veracity]['ci']"),
+                eval(f"{group}_dict['Human-FC'][veracity]['ci']"),
             ],
             capsize=capsize,
             ecolor="k",
@@ -408,13 +413,14 @@ for plot_idx, group in enumerate(groups, start=2):
         )
 
 # Applies to both subplots because sharex/y=True when subplots declared
-ax_map[2].set_xticklabels(conditions)
-ax_map[3].set_xticklabels(conditions)
-ax_map[2].set_ylim((0, 1 - y_reduce))
-ax_map[3].set_ylim((0, 1 - y_reduce))
+conditions = ["Control", "LLM\nForced", "LLM\nOptional", "Human\nFact Check"]
+ax_map[2].set_xticklabels(conditions, fontsize=12)
+ax_map[3].set_xticklabels(conditions, fontsize=12)
+ax_map[2].set_ylim((0, 1))
+ax_map[3].set_ylim((0, 1))
 
-ax_map[2].set_yticks([0, 0.2, 0.4, 0.6, 0.8])
-ax_map[3].set_yticks([0, 0.2, 0.4, 0.6, 0.8])
+ax_map[2].set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0])
+ax_map[3].set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0])
 
 ### Set legend details
 # --------------------
@@ -446,7 +452,7 @@ legend2 = fig.legend(
 
 # fig.tight_layout()
 
-ax_map[1].text(0.79, 1.34, "LLM judgment", transform=ax_map[1].transAxes)
+ax_map[1].text(0.82, 1.34, "LLM judgment", transform=ax_map[1].transAxes)
 
 
 plt.subplots_adjust(hspace=0.2, wspace=0.38, right=0.95)
@@ -457,5 +463,6 @@ ax_map[1].annotate("(b)", xy=(-0.125, 1.3), xycoords=ax_map[1].transAxes, fontsi
 ax_map[2].annotate("(c)", xy=(-0.3, 0.98), xycoords=ax_map[2].transAxes, fontsize=16)
 ax_map[3].annotate("(d)", xy=(-0.3, 0.98), xycoords=ax_map[3].transAxes, fontsize=16)
 
-fig.savefig(os.path.join(FIGURES_DIR, "main_effects.pdf"), transparent=True, dpi=800)
-fig.savefig(os.path.join(FIGURES_DIR, "main_effects.png"), transparent=True, dpi=800)
+fig.savefig(os.path.join(FIGURES_DIR, "main_effects.pdf"), transparent=True, dpi=1000)
+fig.savefig(os.path.join(FIGURES_DIR, "main_effects.png"), transparent=True, dpi=1000)
+fig.savefig(os.path.join(FIGURES_DIR, "main_effects.svg"), transparent=True, dpi=1000)

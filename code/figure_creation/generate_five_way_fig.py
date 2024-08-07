@@ -11,6 +11,7 @@ Outputs:
 
 Author: Matthew DeVerna
 """
+
 import os
 
 import pandas as pd
@@ -565,6 +566,11 @@ fig.savefig(
 )
 fig.savefig(
     os.path.join(FIGURES_DIR, "five_way.png"),
+    transparent=True,
+    dpi=800,
+)
+fig.savefig(
+    os.path.join(FIGURES_DIR, "five_way.svg"),
     transparent=True,
     dpi=800,
 )

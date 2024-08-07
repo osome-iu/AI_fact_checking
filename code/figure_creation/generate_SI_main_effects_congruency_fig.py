@@ -12,6 +12,7 @@ Outputs:
 
 Author: Matthew DeVerna
 """
+
 import os
 import sys
 
@@ -100,10 +101,10 @@ mean_df = mean_df.merge(cis, on=["Group", "Condition", "veracity", "congruency"]
 ### Make the damn figure! ###
 # ---------------------------
 
-fig, axes = plt.subplots(figsize=(8, 6), nrows=2, ncols=3)
+fig, axes = plt.subplots(figsize=(10, 6), nrows=2, ncols=4)
 
 for row_idx, group in enumerate(["Belief", "Share"]):
-    for col_idx, cond in enumerate(["Control", "Forced", "Optional"]):
+    for col_idx, cond in enumerate(["Control", "Forced", "Optional", "Human-FC"]):
         for veracity in [True, False]:
             for congru in ["congruent", "incongruent"]:
                 selected_df = mean_df[
@@ -139,7 +140,7 @@ for row_idx, group in enumerate(["Belief", "Share"]):
                 axes[loc].grid(True, axis="y", zorder=0)
 
                 # Make it pretty!
-                axes[loc].set_title(f"{cond}")
+                axes[loc].set_title(f"{cond.replace('-', ' ')}", fontsize=14)
                 axes[loc].yaxis.set_major_formatter(YTICKS)
 
                 axes[loc].set_ylim((0, 1))
@@ -159,9 +160,11 @@ for row_idx, group in enumerate(["Belief", "Share"]):
                 if loc == (1, 0):
                     axes[loc].set_ylabel("Willing to share")
 
-axes[(0, 2)].legend()
+axes[(1, 3)].legend(fontsize=10)
 
 plt.tight_layout()
+
+plt.subplots_adjust(wspace=0.15)
 
 # Add figure annotations
 axes[(0, 0)].annotate(
