@@ -1,0 +1,88 @@
+PROMPT TYPE: BINARY
+--------------------------------------------------------------------------- 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       18
+          True         2
+True      False       13
+          True         7
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       0.90
+          True        0.10
+True      False       0.65
+          True        0.35
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 0.78
+	- Recall   : 0.35
+	- F1       : 0.48
+	- Accuracy : 0.62
+	- FN Rate  : 0.65
+	- FP Rate  : 0.10
+Veracity: False
+-------------------------
+	- Precision: 0.58
+	- Recall   : 0.90
+	- F1       : 0.71
+	- Accuracy : 0.62
+	- FN Rate  : 0.10
+	- FP Rate  : 0.65
+#################################################################################################### 
+
+
+PROMPT TYPE: RATIONALE
+--------------------------------------------------------------------------- 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       18
+          True         2
+True      False       12
+          True         8
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       0.9
+          True        0.1
+True      False       0.6
+          True        0.4
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 0.80
+	- Recall   : 0.40
+	- F1       : 0.53
+	- Accuracy : 0.65
+	- FN Rate  : 0.60
+	- FP Rate  : 0.10
+Veracity: False
+-------------------------
+	- Precision: 0.60
+	- Recall   : 0.90
+	- F1       : 0.72
+	- Accuracy : 0.65
+	- FN Rate  : 0.10
+	- FP Rate  : 0.60
+#################################################################################################### 
+
+
