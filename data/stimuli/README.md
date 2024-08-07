@@ -5,6 +5,7 @@ This folder contains all stimuli for the study.
 ### Directories
 - `attention_checks/`: Contains the attention check materials
 - `headlines/` : contains images of all headline stimuli.
+- `human_factchecks/` : contains images of the human fact checks utilized for the chatgpt fact checking experiment.
 - `chatgpt_responses/` : contains screenshots of chatgpt's response to our chosen prompt.
     - Response screenshot filenames take the following form:
         - Ex: `01_CGPT_response__political_prodem_false__2023-01-25.png` where the prefix is the stimuli number (matches to the headline image) and the suffix (after `_CGPT_response__`) includes the type (political/medical), ideological congruency (prodem vs. prorep), veracity (true, false), and the date when the screenshot was captured.

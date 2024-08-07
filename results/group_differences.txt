@@ -22,9 +22,11 @@ Mann Whitney U Results:
 Belief:
 	- Forced - Control  : -0.0450  (-4.50%)
 	- Optional - Control: -0.0027  (-0.27%)
+	- Human-FC - Control: 0.1806  (18.06%)
 Share:
 	- Forced - Control  : -0.0043  (-0.43%)
 	- Optional - Control: -0.0067  (-0.67%)
+	- Human-FC - Control: 0.0898  (8.98%)
 ----------
 Note: Raw and percentage values rounded to the fourth and second decimal, respectively.
 Note: See below for statistical tests.
@@ -36,16 +38,16 @@ Note: See below for statistical tests.
 Belief ANOVA
 --------------------------------------------------
 	- Model: discernment ~ C(Condition)
-                 sum_sq     df         F    PR(>F)
-C(Condition)   0.315017    2.0  1.717114  0.180293
-Residual      68.429582  746.0       NaN       NaN 
+                  sum_sq      df          F        PR(>F)
+C(Condition)    8.571648     3.0  25.649711  5.161007e-16
+Residual      116.406407  1045.0        NaN           NaN 
 
 Share ANOVA
 --------------------------------------------------
 	- Model: discernment ~ C(Condition)
-                 sum_sq     df         F    PR(>F)
-C(Condition)   0.006130    2.0  0.072871  0.929727
-Residual      33.479709  796.0       NaN       NaN 
+                 sum_sq      df          F        PR(>F)
+C(Condition)   1.961576     3.0  12.221038  7.185533e-08
+Residual      59.173985  1106.0        NaN           NaN 
 
 CHECK ASSUMPTIONS
 --------------------------------------------------
@@ -53,36 +55,36 @@ Checking for normality...
 ------------------------- 
 
 Belief:
-	- Shapiro-Wilk Test Statistic: 0.9545618295669556
-	- Shapiro-Wilk Test p-value: 1.914586856568111e-14
+	- Shapiro-Wilk Test Statistic: 0.945332944393158
+	- Shapiro-Wilk Test p-value: 2.987152109673e-19
 
 Share:
-	- Shapiro-Wilk Test Statistic: 0.8883247375488281
-	- Shapiro-Wilk Test p-value: 1.426555077301599e-23
+	- Shapiro-Wilk Test Statistic: 0.8889902234077454
+	- Shapiro-Wilk Test p-value: 1.6744069603241627e-27
 
 Checking for homoscedasticity...
 ------------------------- 
 
 Belief:
-	- Levene test statistic: 0.5155063135588874
-	- Levene test p-value: 0.5974107297960454
+	- Levene test statistic: 15.312147891730264
+	- Levene test p-value: 9.358029233338162e-10
 
 Share:
-	- Levene test statistic: 1.2262693235253532
-	- Levene test p-value: 0.293938687657097
+	- Levene test statistic: 8.536875124003888
+	- Levene test p-value: 1.317171119569527e-05
 
 NON-PARAMETRIC ALTERNATIVES
 --------------------------------------------------
 Belief:
 -------------------------
-Kruskal-Wallis statistic: 3.1469151972079956
-Kruskal-Wallis test p-value: 0.20732708778173578
+Kruskal-Wallis statistic: 72.25541144516521
+Kruskal-Wallis test p-value: 1.4034678873338808e-15
 
 Mann-Whitney U Tests
 	- Control vs Forced:
 		- Statistic: 31993.000
 		- P-value: 0.151
-		- P-value (Bonferroni corrected): 0.454
+		- P-value (Bonferroni corrected): 0.605
 		- Cohens d: 0.146
 		- 95% CI: [-0.0090, 0.1004]
 		- 95% CI (%): [-0.90%, 10.04%]
@@ -93,17 +95,38 @@ Mann-Whitney U Tests
 		- Cohens d: 0.009
 		- 95% CI: [-0.0503, 0.0552]
 		- 95% CI (%): [-5.03%, 5.52%]
+	- Control vs Human_FC:
+		- Statistic: 25210.000
+		- P-value: 0.000
+		- P-value (Bonferroni corrected): 0.000
+		- Cohens d: -0.496
+		- 95% CI: [-0.2400, -0.1200]
+		- 95% CI (%): [-24.00%, -12.00%]
 	- Forced vs Optional:
 		- Statistic: 29547.000
 		- P-value: 0.104
-		- P-value (Bonferroni corrected): 0.311
+		- P-value (Bonferroni corrected): 0.415
 		- Cohens d: -0.142
-		- 95% CI: [-0.0940, 0.0118]
-		- 95% CI (%): [-9.40%, 1.18%]
+		- 95% CI: [-0.0954, 0.0094]
+		- 95% CI (%): [-9.54%, 0.94%]
+	- Forced vs Human_FC:
+		- Statistic: 23224.500
+		- P-value: 0.000
+		- P-value (Bonferroni corrected): 0.000
+		- Cohens d: -0.627
+		- 95% CI: [-0.2830, -0.1667]
+		- 95% CI (%): [-28.30%, -16.67%]
+	- Optional vs Human_FC:
+		- Statistic: 27054.000
+		- P-value: 0.000
+		- P-value (Bonferroni corrected): 0.000
+		- Cohens d: -0.516
+		- 95% CI: [-0.2384, -0.1248]
+		- 95% CI (%): [-23.84%, -12.48%]
 Share:
 -------------------------
-Kruskal-Wallis test statistic: 0.019534790417331784
-Kruskal-Wallis test p-value: 0.990280150869552
+Kruskal-Wallis test statistic: 22.078900860808275
+Kruskal-Wallis test p-value: 6.281114143558303e-05
 
 Mann-Whitney U Tests
 	- Control vs Forced:
@@ -111,22 +134,43 @@ Mann-Whitney U Tests
 		- P-value: 0.942
 		- P-value (Bonferroni corrected): 1.000
 		- Cohens d: 0.021
-		- 95% CI: [-0.0305, 0.0393]
-		- 95% CI (%): [-3.05%, 3.93%]
+		- 95% CI: [-0.0310, 0.0392]
+		- 95% CI (%): [-3.10%, 3.92%]
 	- Control vs Optional:
 		- Statistic: 34860.000
 		- P-value: 0.884
 		- P-value (Bonferroni corrected): 1.000
 		- Cohens d: 0.032
-		- 95% CI: [-0.0292, 0.0418]
-		- 95% CI (%): [-2.92%, 4.18%]
+		- 95% CI: [-0.0286, 0.0418]
+		- 95% CI (%): [-2.86%, 4.18%]
+	- Control vs Human_FC:
+		- Statistic: 34224.000
+		- P-value: 0.000
+		- P-value (Bonferroni corrected): 0.001
+		- Cohens d: -0.346
+		- 95% CI: [-0.1333, -0.0489]
+		- 95% CI (%): [-13.33%, -4.89%]
 	- Forced vs Optional:
 		- Statistic: 35284.000
 		- P-value: 0.958
 		- P-value (Bonferroni corrected): 1.000
 		- Cohens d: 0.012
-		- 95% CI: [-0.0306, 0.0364]
-		- 95% CI (%): [-3.06%, 3.64%]
+		- 95% CI: [-0.0297, 0.0348]
+		- 95% CI (%): [-2.97%, 3.48%]
+	- Forced vs Human_FC:
+		- Statistic: 34389.500
+		- P-value: 0.000
+		- P-value (Bonferroni corrected): 0.001
+		- Cohens d: -0.379
+		- 95% CI: [-0.1348, -0.0536]
+		- 95% CI (%): [-13.48%, -5.36%]
+	- Optional vs Human_FC:
+		- Statistic: 33712.000
+		- P-value: 0.000
+		- P-value (Bonferroni corrected): 0.001
+		- Cohens d: -0.385
+		- 95% CI: [-0.1370, -0.0571]
+		- 95% CI (%): [-13.70%, -5.71%]
 
 ########################################################################
                 GROUP COMPARISONS FOR TRUE HEADLINES
@@ -135,16 +179,16 @@ Mann-Whitney U Tests
 Belief ANOVA
 --------------------------------------------------
 	- Model: prop_yes_True ~ C(Condition)
-                 sum_sq     df         F    PR(>F)
-C(Condition)   0.041318    2.0  0.399058  0.671095
-Residual      38.619664  746.0       NaN       NaN 
+                 sum_sq      df          F        PR(>F)
+C(Condition)   6.021049     3.0  43.546878  1.613546e-26
+Residual      48.162630  1045.0        NaN           NaN 
 
 Share ANOVA
 --------------------------------------------------
 	- Model: prop_yes_True ~ C(Condition)
-                  sum_sq     df         F    PR(>F)
-C(Condition)    0.849560    2.0  2.958791  0.052453
-Residual      114.278075  796.0       NaN       NaN 
+                  sum_sq      df         F    PR(>F)
+C(Condition)    2.141159     3.0  5.004166  0.001888
+Residual      157.743348  1106.0       NaN       NaN 
 
 CHECK ASSUMPTIONS
 --------------------------------------------------
@@ -152,80 +196,146 @@ Checking for normality...
 ------------------------- 
 
 Belief:
-	- Shapiro-Wilk Test Statistic: 0.9552591443061829
-	- Shapiro-Wilk Test p-value: 2.5598763763574027e-14
+	- Shapiro-Wilk Test Statistic: 0.9535925984382629
+	- Shapiro-Wilk Test p-value: 1.0686289258110298e-17
 
 Share:
-	- Shapiro-Wilk Test Statistic: 0.8927980661392212
-	- Shapiro-Wilk Test p-value: 3.88428577962531e-23
+	- Shapiro-Wilk Test Statistic: 0.9044090509414673
+	- Shapiro-Wilk Test p-value: 8.984940821192663e-26
 
 Checking for homoscedasticity...
 ------------------------- 
 
 Belief:
-	- Levene test statistic: 2.6987903143288485
-	- Levene test p-value: 0.06794384042909314
+	- Levene test statistic: 10.060694415706736
+	- Levene test p-value: 1.5436888439733546e-06
 
 Share:
-	- Levene test statistic: 1.6600162900621347
-	- Levene test p-value: 0.19079341957849769
+	- Levene test statistic: 1.1860744040164193
+	- Levene test p-value: 0.31381089734198886
 
 NON-PARAMETRIC ALTERNATIVES
 --------------------------------------------------
 Belief:
 -------------------------
-Kruskal-Wallis statistic: 2.632025880129865
-Kruskal-Wallis test p-value: 0.26820251252804256
+Kruskal-Wallis statistic: 135.35542468586394
+Kruskal-Wallis test p-value: 3.7913563205954187e-29
 
 Mann-Whitney U Tests
 	- Control vs Forced:
+		- Mean-diff (prop): 0.017
+		- Mean-diff (%): 1.66%
 		- Statistic: 32216.500
 		- P-value: 0.114
-		- P-value (Bonferroni corrected): 0.342
+		- P-value (Bonferroni corrected): 0.456
 		- Cohens d: 0.073
-		- 95% CI: [-0.0221, 0.0561]
-		- 95% CI (%): [-2.21%, 5.61%]
+		- 95% CI: [-0.0246, 0.0561]
+		- 95% CI (%): [-2.46%, 5.61%]
 	- Control vs Optional:
+		- Mean-diff (prop): 0.015
+		- Mean-diff (%): 1.51%
 		- Statistic: 33307.500
 		- P-value: 0.251
-		- P-value (Bonferroni corrected): 0.754
+		- P-value (Bonferroni corrected): 1.000
 		- Cohens d: 0.064
-		- 95% CI: [-0.0267, 0.0552]
-		- 95% CI (%): [-2.67%, 5.52%]
+		- 95% CI: [-0.0261, 0.0553]
+		- 95% CI (%): [-2.61%, 5.53%]
+	- Control vs Human_FC:
+		- Mean-diff (prop): -0.156
+		- Mean-diff (%): -15.63%
+		- Statistic: 21663.000
+		- P-value: 0.000
+		- P-value (Bonferroni corrected): 0.000
+		- Cohens d: -0.740
+		- 95% CI: [-0.1931, -0.1197]
+		- 95% CI (%): [-19.31%, -11.97%]
 	- Forced vs Optional:
+		- Mean-diff (prop): -0.001
+		- Mean-diff (%): -0.15%
 		- Statistic: 31537.000
 		- P-value: 0.673
 		- P-value (Bonferroni corrected): 1.000
 		- Cohens d: -0.007
-		- 95% CI: [-0.0393, 0.0372]
-		- 95% CI (%): [-3.93%, 3.72%]
+		- 95% CI: [-0.0386, 0.0359]
+		- 95% CI (%): [-3.86%, 3.59%]
+	- Forced vs Human_FC:
+		- Mean-diff (prop): -0.173
+		- Mean-diff (%): -17.29%
+		- Statistic: 18933.500
+		- P-value: 0.000
+		- P-value (Bonferroni corrected): 0.000
+		- Cohens d: -0.903
+		- 95% CI: [-0.2055, -0.1393]
+		- 95% CI (%): [-20.55%, -13.93%]
+	- Optional vs Human_FC:
+		- Mean-diff (prop): -0.171
+		- Mean-diff (%): -17.15%
+		- Statistic: 21001.000
+		- P-value: 0.000
+		- P-value (Bonferroni corrected): 0.000
+		- Cohens d: -0.842
+		- 95% CI: [-0.2064, -0.1366]
+		- 95% CI (%): [-20.64%, -13.66%]
 Share:
 -------------------------
-Kruskal-Wallis test statistic: 5.325904351491742
-Kruskal-Wallis test p-value: 0.06974202681254767
+Kruskal-Wallis test statistic: 14.397559488084752
+Kruskal-Wallis test p-value: 0.0024110441638484493
 
 Mann-Whitney U Tests
 	- Control vs Forced:
+		- Mean-diff (prop): -0.065
+		- Mean-diff (%): -6.54%
 		- Statistic: 32526.500
 		- P-value: 0.058
-		- P-value (Bonferroni corrected): 0.173
+		- P-value (Bonferroni corrected): 0.231
 		- Cohens d: -0.175
-		- 95% CI: [-0.1298, -0.0034]
-		- 95% CI (%): [-12.98%, -0.34%]
+		- 95% CI: [-0.1272, -0.0022]
+		- 95% CI (%): [-12.72%, -0.22%]
 	- Control vs Optional:
+		- Mean-diff (prop): 0.007
+		- Mean-diff (%): 0.67%
 		- Statistic: 35813.000
 		- P-value: 0.688
 		- P-value (Bonferroni corrected): 1.000
 		- Cohens d: 0.018
-		- 95% CI: [-0.0581, 0.0720]
-		- 95% CI (%): [-5.81%, 7.20%]
+		- 95% CI: [-0.0580, 0.0695]
+		- 95% CI (%): [-5.80%, 6.95%]
+	- Control vs Human_FC:
+		- Mean-diff (prop): -0.096
+		- Mean-diff (%): -9.58%
+		- Statistic: 35388.500
+		- P-value: 0.002
+		- P-value (Bonferroni corrected): 0.008
+		- Cohens d: -0.259
+		- 95% CI: [-0.1561, -0.0352]
+		- 95% CI (%): [-15.61%, -3.52%]
 	- Forced vs Optional:
+		- Mean-diff (prop): 0.072
+		- Mean-diff (%): 7.21%
 		- Statistic: 38985.000
 		- P-value: 0.040
-		- P-value (Bonferroni corrected): 0.120
+		- P-value (Bonferroni corrected): 0.159
 		- Cohens d: 0.187
-		- 95% CI: [0.0066, 0.1364]
-		- 95% CI (%): [0.66%, 13.64%]
+		- 95% CI: [0.0088, 0.1373]
+		- 95% CI (%): [0.88%, 13.73%]
+	- Forced vs Human_FC:
+		- Mean-diff (prop): -0.030
+		- Mean-diff (%): -3.03%
+		- Statistic: 39727.500
+		- P-value: 0.293
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: -0.080
+		- 95% CI: [-0.0908, 0.0321]
+		- 95% CI (%): [-9.08%, 3.21%]
+	- Optional vs Human_FC:
+		- Mean-diff (prop): -0.102
+		- Mean-diff (%): -10.25%
+		- Statistic: 34763.000
+		- P-value: 0.002
+		- P-value (Bonferroni corrected): 0.007
+		- Cohens d: -0.268
+		- 95% CI: [-0.1657, -0.0435]
+		- 95% CI (%): [-16.57%, -4.35%]
 
 ########################################################################
                 GROUP COMPARISONS FOR FALSE HEADLINES
@@ -234,16 +344,16 @@ Mann-Whitney U Tests
 Belief ANOVA
 --------------------------------------------------
 	- Model: prop_yes_False ~ C(Condition)
-                 sum_sq     df         F    PR(>F)
-C(Condition)   0.220122    2.0  0.857202  0.424765
-Residual      95.783029  746.0       NaN       NaN 
+                  sum_sq      df         F    PR(>F)
+C(Condition)    0.403380     3.0  1.021991  0.382021
+Residual      137.487121  1045.0       NaN       NaN 
 
 Share ANOVA
 --------------------------------------------------
 	- Model: prop_yes_False ~ C(Condition)
-                  sum_sq     df         F    PR(>F)
-C(Condition)    0.868937    2.0  2.752837  0.064354
-Residual      125.629261  796.0       NaN       NaN 
+                  sum_sq      df         F    PR(>F)
+C(Condition)    0.937522     3.0  1.971065  0.116573
+Residual      175.353505  1106.0       NaN       NaN 
 
 CHECK ASSUMPTIONS
 --------------------------------------------------
@@ -251,77 +361,143 @@ Checking for normality...
 ------------------------- 
 
 Belief:
-	- Shapiro-Wilk Test Statistic: 0.7962983846664429
-	- Shapiro-Wilk Test p-value: 1.333350339911726e-29
+	- Shapiro-Wilk Test Statistic: 0.7834271788597107
+	- Shapiro-Wilk Test p-value: 4.083814598536405e-35
 
 Share:
-	- Shapiro-Wilk Test Statistic: 0.8358832597732544
-	- Shapiro-Wilk Test p-value: 7.0029846117582306e-28
+	- Shapiro-Wilk Test Statistic: 0.8280435800552368
+	- Shapiro-Wilk Test p-value: 6.603008173274062e-33
 
 Checking for homoscedasticity...
 ------------------------- 
 
 Belief:
-	- Levene test statistic: 1.1243341201857016
-	- Levene test p-value: 0.3254185831341668
+	- Levene test statistic: 0.6747638597741359
+	- Levene test p-value: 0.5675847022584889
 
 Share:
-	- Levene test statistic: 3.885244062983593
-	- Levene test p-value: 0.020933534990927292
+	- Levene test statistic: 2.360655520987976
+	- Levene test p-value: 0.06992973044645083
 
 NON-PARAMETRIC ALTERNATIVES
 --------------------------------------------------
 Belief:
 -------------------------
-Kruskal-Wallis statistic: 1.8211142039588322
-Kruskal-Wallis test p-value: 0.4023000394443014
+Kruskal-Wallis statistic: 13.134236106056422
+Kruskal-Wallis test p-value: 0.004355124332930515
 
 Mann-Whitney U Tests
 	- Control vs Forced:
+		- Mean-diff (prop): -0.028
+		- Mean-diff (%): -2.84%
 		- Statistic: 29583.000
 		- P-value: 0.907
 		- P-value (Bonferroni corrected): 1.000
 		- Cohens d: -0.078
-		- 95% CI: [-0.0946, 0.0354]
-		- 95% CI (%): [-9.46%, 3.54%]
+		- 95% CI: [-0.0952, 0.0367]
+		- 95% CI (%): [-9.52%, 3.67%]
 	- Control vs Optional:
+		- Mean-diff (prop): 0.012
+		- Mean-diff (%): 1.24%
 		- Statistic: 33197.000
 		- P-value: 0.277
-		- P-value (Bonferroni corrected): 0.832
+		- P-value (Bonferroni corrected): 1.000
 		- Cohens d: 0.035
-		- 95% CI: [-0.0485, 0.0766]
-		- 95% CI (%): [-4.85%, 7.66%]
+		- 95% CI: [-0.0504, 0.0738]
+		- 95% CI (%): [-5.04%, 7.38%]
+	- Control vs Human_FC:
+		- Mean-diff (prop): 0.024
+		- Mean-diff (%): 2.42%
+		- Statistic: 41554.500
+		- P-value: 0.002
+		- P-value (Bonferroni corrected): 0.009
+		- Cohens d: 0.066
+		- 95% CI: [-0.0367, 0.0866]
+		- 95% CI (%): [-3.67%, 8.66%]
 	- Forced vs Optional:
+		- Mean-diff (prop): 0.041
+		- Mean-diff (%): 4.08%
 		- Statistic: 34241.500
 		- P-value: 0.220
-		- P-value (Bonferroni corrected): 0.659
+		- P-value (Bonferroni corrected): 0.879
 		- Cohens d: 0.113
-		- 95% CI: [-0.0210, 0.1032]
-		- 95% CI (%): [-2.10%, 10.32%]
+		- 95% CI: [-0.0221, 0.1062]
+		- 95% CI (%): [-2.21%, 10.62%]
+	- Forced vs Human_FC:
+		- Mean-diff (prop): 0.053
+		- Mean-diff (%): 5.26%
+		- Statistic: 42712.500
+		- P-value: 0.002
+		- P-value (Bonferroni corrected): 0.007
+		- Cohens d: 0.141
+		- 95% CI: [-0.0113, 0.1147]
+		- 95% CI (%): [-1.13%, 11.47%]
+	- Optional vs Human_FC:
+		- Mean-diff (prop): 0.012
+		- Mean-diff (%): 1.18%
+		- Statistic: 42783.000
+		- P-value: 0.052
+		- P-value (Bonferroni corrected): 0.209
+		- Cohens d: 0.033
+		- 95% CI: [-0.0477, 0.0712]
+		- 95% CI (%): [-4.77%, 7.12%]
 Share:
 -------------------------
-Kruskal-Wallis test statistic: 4.351966356983184
-Kruskal-Wallis test p-value: 0.11349651146870421
+Kruskal-Wallis test statistic: 5.282461006731058
+Kruskal-Wallis test p-value: 0.15224452698815313
 
 Mann-Whitney U Tests
 	- Control vs Forced:
+		- Mean-diff (prop): -0.070
+		- Mean-diff (%): -6.98%
 		- Statistic: 33610.000
 		- P-value: 0.193
-		- P-value (Bonferroni corrected): 0.578
+		- P-value (Bonferroni corrected): 0.770
 		- Cohens d: -0.179
-		- 95% CI: [-0.1381, -0.0044]
-		- 95% CI (%): [-13.81%, -0.44%]
+		- 95% CI: [-0.1365, -0.0062]
+		- 95% CI (%): [-13.65%, -0.62%]
 	- Control vs Optional:
+		- Mean-diff (prop): -0.000
+		- Mean-diff (%): -0.00%
 		- Statistic: 36961.000
 		- P-value: 0.284
-		- P-value (Bonferroni corrected): 0.852
+		- P-value (Bonferroni corrected): 1.000
 		- Cohens d: -0.000
-		- 95% CI: [-0.0674, 0.0655]
-		- 95% CI (%): [-6.74%, 6.55%]
+		- 95% CI: [-0.0644, 0.0655]
+		- 95% CI (%): [-6.44%, 6.55%]
+	- Control vs Human_FC:
+		- Mean-diff (prop): -0.006
+		- Mean-diff (%): -0.60%
+		- Statistic: 42988.500
+		- P-value: 0.454
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: -0.016
+		- 95% CI: [-0.0709, 0.0573]
+		- 95% CI (%): [-7.09%, 5.73%]
 	- Forced vs Optional:
+		- Mean-diff (prop): 0.070
+		- Mean-diff (%): 6.98%
 		- Statistic: 38728.000
 		- P-value: 0.052
-		- P-value (Bonferroni corrected): 0.157
+		- P-value (Bonferroni corrected): 0.209
 		- Cohens d: 0.170
-		- 95% CI: [-0.0006, 0.1399]
-		- 95% CI (%): [-0.06%, 13.99%]
+		- 95% CI: [0.0015, 0.1426]
+		- 95% CI (%): [0.15%, 14.26%]
+	- Forced vs Human_FC:
+		- Mean-diff (prop): 0.064
+		- Mean-diff (%): 6.38%
+		- Statistic: 45500.500
+		- P-value: 0.062
+		- P-value (Bonferroni corrected): 0.248
+		- Cohens d: 0.158
+		- 95% CI: [-0.0011, 0.1320]
+		- 95% CI (%): [-0.11%, 13.20%]
+	- Optional vs Human_FC:
+		- Mean-diff (prop): -0.006
+		- Mean-diff (%): -0.60%
+		- Statistic: 40444.000
+		- P-value: 0.814
+		- P-value (Bonferroni corrected): 1.000
+		- Cohens d: -0.015
+		- 95% CI: [-0.0715, 0.0585]
+		- 95% CI (%): [-7.15%, 5.85%]

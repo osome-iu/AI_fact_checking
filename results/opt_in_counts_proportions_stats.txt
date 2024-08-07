@@ -1,0 +1,133 @@
+BY GROUP
+################################################## 
+
+Mann-Whitney U test: Belief vs. Share Proportion of Fact Checks Opt'd Into
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+U = 31521.5, p = 0.10040059525872447
+
+Opt In Counts (mean)
+--------------------------------------------------
+Group
+Belief    21.551724
+Share     23.817490
+Name: count, dtype: float64 
+
+Opt In Counts (standard deviation)
+--------------------------------------------------
+Group
+Belief    15.778826
+Share     15.688188
+Name: count, dtype: float64 
+
+Opt In Counts (median)
+--------------------------------------------------
+Group
+Belief    20.0
+Share     27.0
+Name: count, dtype: float64 
+
+Opt In Proportions (mean)
+--------------------------------------------------
+Group
+Belief    0.538793
+Share     0.595437
+Name: proportion, dtype: float64 
+
+Opt In Proportions (standard deviation)
+--------------------------------------------------
+Group
+Belief    0.394471
+Share     0.392205
+Name: proportion, dtype: float64 
+
+Opt In Proportions (median)
+--------------------------------------------------
+Group
+Belief    0.500
+Share     0.675
+Name: proportion, dtype: float64 
+
+Number and proportion of participants who opt into > 20 fact checks
+--------------------------------------------------
+273 (52.10%)
+
+Mean (std) and median of counts for participants who opt into > 20 and <= 20 fact checks
+--------------------------------------------------
+Mean (std) for > 20: 36.67 (5.51)
+Median: 40.0
+Mean (std) for <= 20: 7.48 (6.37)
+Median: 7.0
+
+
+
+BY VERACITY
+################################################## 
+
+Kruskal-Wallis test: Proportion of Fact Checks Opt'd Into by Veracity
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Kruskal-Wallis statistic: 9.868824048077927
+Kruskal-Wallis test p-value: 0.01971472959683836
+
+Mann-Whitney U tests (Bonferroni corrected)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Bonferroni corrected p-values (num. groups = 2):
+	- Comparison: belief-true vs belief-false, p-value: 0.13268790628532093
+	- Comparison: share-true vs share-false, p-value: 0.54698069870653
+
+Interpretation with Bonferroni correction:
+	- No significant difference between belief-true and belief-false
+	- No significant difference between share-true and share-false
+
+Opt In Counts  (mean)
+--------------------------------------------------
+Group   option_cond  veracity
+Belief  Opt_in       False       10.084291
+                     True        11.467433
+Share   Opt_in       False       11.471483
+                     True        12.346008
+Name: count, dtype: float64
+
+Opt In Counts  (standard deviation)
+--------------------------------------------------
+Group   option_cond  veracity
+Belief  Opt_in       False       8.137318
+                     True        7.917112
+Share   Opt_in       False       8.144107
+                     True        7.860305
+Name: count, dtype: float64
+
+Opt In Counts (median)
+--------------------------------------------------
+Group   option_cond  veracity
+Belief  Opt_in       False        8.0
+                     True        12.0
+Share   Opt_in       False       12.0
+                     True        15.0
+Name: count, dtype: float64
+
+Opt In Proportions (mean)
+--------------------------------------------------
+Group   option_cond  veracity
+Belief  Opt_in       False       0.504215
+                     True        0.573372
+Share   Opt_in       False       0.573574
+                     True        0.617300
+Name: proportion, dtype: float64
+
+Opt In Proportions (standard deviation)
+--------------------------------------------------
+Group   option_cond  veracity
+Belief  Opt_in       False       0.406866
+                     True        0.395856
+Share   Opt_in       False       0.407205
+                     True        0.393015
+Name: proportion, dtype: float64
+
+Opt In Proportions (median)
+--------------------------------------------------
+Group   option_cond  veracity
+Belief  Opt_in       False       0.40
+                     True        0.60
+Share   Opt_in       False       0.60
+                     True        0.75
+Name: proportion, dtype: float64

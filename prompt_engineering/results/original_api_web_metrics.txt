@@ -1,0 +1,282 @@
+METHOD: API
+--------------------------------------------------------------------------- 
+
+Raw Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     unsure      12
+          false        8
+True      unsure      19
+          true         1
+Name: judgment, dtype: int64
+
+
+Raw Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     unsure      0.60
+          false       0.40
+True      unsure      0.95
+          true        0.05
+Name: judgment, dtype: float64
+
+
+
+CONDITION: IGNORE UNSURE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       8
+True      True        1
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       1.0
+True      True        1.0
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 1.00
+	- Recall   : 1.00
+	- F1       : 1.00
+	- Accuracy : 1.00
+	- FN Rate  : 0.00
+	- FP Rate  : 0.00
+Veracity: False
+-------------------------
+	- Precision: 1.00
+	- Recall   : 1.00
+	- F1       : 1.00
+	- Accuracy : 1.00
+	- FN Rate  : 0.00
+	- FP Rate  : 0.00
+
+CONDITION: UNSURE=TRUE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     True        12
+          False        8
+True      True        20
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     True        0.6
+          False       0.4
+True      True        1.0
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 0.62
+	- Recall   : 1.00
+	- F1       : 0.77
+	- Accuracy : 0.70
+	- FN Rate  : 0.00
+	- FP Rate  : 0.60
+Veracity: False
+-------------------------
+	- Precision: 1.00
+	- Recall   : 0.40
+	- F1       : 0.57
+	- Accuracy : 0.70
+	- FN Rate  : 0.60
+	- FP Rate  : 0.00
+
+CONDITION: UNSURE=FALSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       20
+True      False       19
+          True         1
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       1.00
+True      False       0.95
+          True        0.05
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 1.00
+	- Recall   : 0.05
+	- F1       : 0.10
+	- Accuracy : 0.53
+	- FN Rate  : 0.95
+	- FP Rate  : 0.00
+Veracity: False
+-------------------------
+	- Precision: 0.51
+	- Recall   : 1.00
+	- F1       : 0.68
+	- Accuracy : 0.53
+	- FN Rate  : 0.00
+	- FP Rate  : 0.95
+#################################################################################################### 
+
+
+METHOD: WEB
+--------------------------------------------------------------------------- 
+
+Raw Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     false       14
+          unsure       6
+True      unsure      20
+Name: judgment, dtype: int64
+
+
+Raw Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     false       0.7
+          unsure      0.3
+True      unsure      1.0
+Name: judgment, dtype: float64
+
+
+
+CONDITION: IGNORE UNSURE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       14
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       1.0
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 0.00
+	- Recall   : 0.00
+	- F1       : 0.00
+	- Accuracy : 1.00
+	- FN Rate  : 0.00
+	- FP Rate  : 0.00
+Veracity: False
+-------------------------
+	- Precision: 1.00
+	- Recall   : 1.00
+	- F1       : 1.00
+	- Accuracy : 1.00
+	- FN Rate  : 0.00
+	- FP Rate  : 0.00
+
+CONDITION: UNSURE=TRUE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       14
+          True         6
+True      True        20
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       0.7
+          True        0.3
+True      True        1.0
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 0.77
+	- Recall   : 1.00
+	- F1       : 0.87
+	- Accuracy : 0.85
+	- FN Rate  : 0.00
+	- FP Rate  : 0.30
+Veracity: False
+-------------------------
+	- Precision: 1.00
+	- Recall   : 0.70
+	- F1       : 0.82
+	- Accuracy : 0.85
+	- FN Rate  : 0.30
+	- FP Rate  : 0.00
+
+CONDITION: UNSURE=FALSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       20
+True      False       20
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       1.0
+True      False       1.0
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 0.00
+	- Recall   : 0.00
+	- F1       : 0.00
+	- Accuracy : 0.50
+	- FN Rate  : 1.00
+	- FP Rate  : 0.00
+Veracity: False
+-------------------------
+	- Precision: 0.50
+	- Recall   : 1.00
+	- F1       : 0.67
+	- Accuracy : 0.50
+	- FN Rate  : 0.00
+	- FP Rate  : 1.00
+#################################################################################################### 
+
+

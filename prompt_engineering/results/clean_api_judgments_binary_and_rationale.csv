@@ -1,0 +1,81 @@
+prompt_type,judgment,veracity,rationale,time_created,model
+prompt_json_rationale,True,False,"The headline is true as it reports an incident where the 'Blacks 4 Trump' group was caught using blackface to pretend they have black members, which is deceptive and inappropriate.",1710174630,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible source or evidence to support the claim that Biden bought film rights to a 'MAD' movie to upset Trump.,1710174631,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible information or evidence to support the claim that Tucker Carlson is facing financial difficulties or needs to sell his bow tie collection.,1710174632,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible evidence or reports to support this claim. It is likely a fabricated or satirical headline.,1710174633,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,"The headline is false. The concept of '40 acres and a mule' refers to a promise made to formerly enslaved African Americans after the Civil War, but it was never granted by the Supreme Court. It was a policy proposed by General William T. Sherman and later overturned by President Andrew Johnson.",1710174634,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,"It is not legally possible for infants to sign contracts, including NDAs, so the claim that Trump is suing his grandchildren for violating NDAs he made them sign as infants is false.",1710174636,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible source or evidence to support the claim that Trump ordered Americans to stop eating Chinese food.,1710174637,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible evidence to support the claim that Trump routinely forced staffers to shred and eat White House documents.,1710174638,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,"The headline is false as it presents a highly unlikely and absurd scenario. The Founding Fathers are historical figures who are no longer alive and therefore cannot be sued by anyone, including Donald Trump.",1710174640,gpt-3.5-turbo-0125
+prompt_json_rationale,True,False,The headline is true. It accurately reflects the reported statement made by a Trump voter wanting Taco Bell shut down for being 'too Mexican.',1710174641,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible evidence to support the claim that Biden ordered the arrest of black leaders or that his elites mocked Appalachia flood victims.,1710174642,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,"There is no credible source or evidence to support this claim. As of now, Hillary Clinton is alive and well.",1710174643,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible information or news reports to support the claim that Chelsea Clinton has been arrested by Delta Force. This headline is false and likely misleading.,1710174644,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible source or evidence to support this claim. It is highly unlikely that Kamala Harris made such a statement about the military.,1710174645,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible evidence or reports to support the claim that Ilhan Omar spat on the Tomb of the Unknown Soldier.,1710174647,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible information or news reports to support the claim that Malia Obama has been arrested again. This headline is likely false and misleading.,1710174648,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,This headline is a fabricated and extreme misrepresentation of reality. There is no credible evidence or basis to support such a claim.,1710174649,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,"There is no credible information or news reports to support the claim that Dr. Anthony Fauci, a prominent figure in the medical field, has been arrested by US Special Forces. This headline is false and likely a piece of misinformation.",1710174650,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible evidence or reports to support the claim that Biden was fake driving or that someone else was steering the vehicle. Such claims are likely misleading or false.,1710174652,gpt-3.5-turbo-0125
+prompt_json_rationale,False,False,There is no credible evidence or reports to support the claim of an affair between Yoko Ono and Hillary Clinton in the 1970s.,1710174653,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,"As of the latest information available, the Biden administration has not canceled $3.9 billion in student loan debt for former for-profit college students.",1710174654,gpt-3.5-turbo-0125
+prompt_json_rationale,True,True,"The headline is true as it states that Biden has reduced discussion of a primary challenge, indicating a current situation that may change in the future.",1710174655,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,The headline contains a biased statement by attributing extremism to Trump without providing evidence. It is important to verify the accuracy of such claims before accepting them as true.,1710174657,gpt-3.5-turbo-0125
+prompt_json_rationale,True,True,True. Digital World Acquisition Corp has indeed urged shareholders to delay the merger with Trump Media.,1710174658,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,There is no record of an ex-NYPD officer being sentenced to 10 years for the Jan. 6 riot. The headline contains false information.,1710174659,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,The headline is speculative and not based on confirmed facts. It implies a predetermined outcome that has not yet occurred.,1710174660,gpt-3.5-turbo-0125
+prompt_json_rationale,True,True,"The headline suggests that there are individuals who could be considered super fans of Joe Biden, albeit with some qualifications.",1710174661,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,"There is no evidence or indication in the headline that the former President mishandled classified documents. The headline is discussing the dangers of a 'Trump-Prosecution Syndrome,' not specific allegations of mishandling classified documents.",1710174662,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,There is no evidence to support the claim that a federal judge has ruled for Lindsey Graham to testify in a Georgia grand jury investigation.,1710174664,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,"As of the time of this fact check, Truth Social has not been barred from the Google Play store. It has faced delays and issues with its launch, but it is not currently banned from the store.",1710174665,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,"The headline is misleading as it suggests Biden made an anti-MAGA speech, which is not supported by the information provided.",1710174667,gpt-3.5-turbo-0125
+prompt_json_rationale,True,True,True. Bill Bennett did express concern about falling reading and math scores using the word 'devastation.',1710174667,gpt-3.5-turbo-0125
+prompt_json_rationale,True,True,"Border Patrol agents often arrest individuals who have entered the country illegally, including those with criminal backgrounds or gang affiliations.",1710174668,gpt-3.5-turbo-0125
+prompt_json_rationale,True,True,True. Democratic Rep. Sean Patrick Maloney has acknowledged employing individuals with criminal records in the past as part of his efforts to give people a second chance.,1710174669,gpt-3.5-turbo-0125
+prompt_json_rationale,True,True,"Gig workers have expressed frustration over the lack of action from the Biden administration on issues important to them, such as labor rights and protections.",1710174671,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,There is no evidence to support the claim that Hunter Biden secured a dinner for a client at the Chinese Embassy following a luncheon hosted by VP Biden. This headline is misleading and lacks factual basis.,1710174672,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,McCarthy did mention 'democracy is on the ballot' but did not blame Democrats for attacking freedoms. He was referring to the importance of the upcoming elections for the future of democracy.,1710174673,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,There is no credible report or evidence to support the claim that Melania Trump felt violated by FBI agents during the Mar-a-Lago raid.,1710174675,gpt-3.5-turbo-0125
+prompt_json_rationale,False,True,There is no evidence to support the claim that Trump has pledged to pardon Jan. 6 Capitol riot defendants.,1710174676,gpt-3.5-turbo-0125
+prompt_json_rationale,True,True,"True. Trump has made previous claims about Biden's mental acuity, and this headline reports that he is reviving those claims after Biden's speech against MAGA supporters.",1710174677,gpt-3.5-turbo-0125
+prompt_json_binary,True,False,,1710174598,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174599,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174599,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174601,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174601,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174602,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174606,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174607,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174608,gpt-3.5-turbo-0125
+prompt_json_binary,True,False,,1710174610,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174610,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174611,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174612,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174612,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174613,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174614,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174614,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174615,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174615,gpt-3.5-turbo-0125
+prompt_json_binary,False,False,,1710174618,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174619,gpt-3.5-turbo-0125
+prompt_json_binary,True,True,,1710174619,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174620,gpt-3.5-turbo-0125
+prompt_json_binary,True,True,,1710174621,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174621,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174622,gpt-3.5-turbo-0125
+prompt_json_binary,True,True,,1710174622,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174623,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174623,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174624,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174624,gpt-3.5-turbo-0125
+prompt_json_binary,True,True,,1710174625,gpt-3.5-turbo-0125
+prompt_json_binary,True,True,,1710174626,gpt-3.5-turbo-0125
+prompt_json_binary,True,True,,1710174626,gpt-3.5-turbo-0125
+prompt_json_binary,True,True,,1710174627,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174627,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174628,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174628,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174629,gpt-3.5-turbo-0125
+prompt_json_binary,False,True,,1710174629,gpt-3.5-turbo-0125

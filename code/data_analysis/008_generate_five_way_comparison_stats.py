@@ -14,6 +14,7 @@ Outputs:
 
 Author: Matthew DeVerna
 """
+
 import os
 
 import numpy as np
@@ -38,6 +39,7 @@ FIVE_WAY_FNAME = "five_headline_type_by_participant.csv"
 # Lists for comparisons
 GROUPS = ["Belief", "Share"]
 # Control is excluded from the list below because it is included in all comparisons
+# Human-FC is excluded from the list below because it doesn't make sense for this comparison
 CONDITIONS = ["Forced", "Optional"]
 VERACITY_LIST = [True, False]
 cGPT_THINK_LIST = ["True", "Unsure", "False"]

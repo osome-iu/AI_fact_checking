@@ -13,6 +13,7 @@ Outputs:
 
 Author: Matthew DeVerna
 """
+
 import os
 
 import pandas as pd
@@ -52,8 +53,8 @@ for temp_group in GROUPS:
         True: "#9ec6d2",
         False: "#f26464",
     }
-    mark_dict = {"Control": "o", "Forced": "x", "Optional": ">"}
-    xbuff_map = {"Control": -0.15, "Forced": 0, "Optional": 0.15}
+    mark_dict = {"Control": "o", "Forced": "x", "Optional": ">", "Human-FC": "d"}
+    xbuff_map = {"Control": -0.2, "Forced": -0.05, "Optional": 0.1, "Human-FC": 0.25}
 
     x_base = np.array([-0.5, 0.5])
 
@@ -121,6 +122,7 @@ for temp_group in GROUPS:
         plt.Line2D([], [], color="k", marker="o", linestyle="None", label="Control"),
         plt.Line2D([], [], color="k", marker="x", linestyle="None", label="Forced"),
         plt.Line2D([], [], color="k", marker=">", linestyle="None", label="Optional"),
+        plt.Line2D([], [], color="k", marker="d", linestyle="None", label="Human FC"),
     ]
 
     labels = [handle.get_label() for handle in handles]

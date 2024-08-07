@@ -1,45 +1,47 @@
 SAMPLE DEMOGRAPHICS
 --------------------------------------------------
-Total num participants: 1548
+Total num participants: 2159
 
 Gender:
 --------------------------------------------------
 COUNTS:
 ----------
-Female    812
-Male      734
-Other       2
+Female    1153
+Male      1003
+Other        3
 Name: gender, dtype: int64 
 
 PERCENTAGES:
 ----------
-Female    52.454780
-Male      47.416021
-Other      0.129199
+Female    53.404354
+Male      46.456693
+Other      0.138953
 Name: gender, dtype: float64 
 
 Age:
 --------------------------------------------------
 COUNTS:
 ----------
-65+      315
-45-54    275
-25-34    267
-35-44    259
-55-64    258
-18-24    174
+65+      455
+25-34    386
+45-54    380
+35-44    369
+55-64    365
+18-24    204
 Name: age_bracket, dtype: int64 
 
 PERCENTAGES:
 ----------
-65+      20.348837
-45-54    17.764858
-25-34    17.248062
-35-44    16.731266
-55-64    16.666667
-18-24    11.240310
+65+      21.074572
+25-34    17.878648
+45-54    17.600741
+35-44    17.091246
+55-64    16.905975
+18-24     9.448819
 Name: age_bracket, dtype: float64 
 
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / Native Hawaiian or Pacific Islander]
 Classified as 'Other' based on: [White / American Indian or Alaska Native]
 Classified as 'Other' based on: [White / American Indian or Alaska Native]
 Classified as 'Other' based on: [White / American Indian or Alaska Native / Other]
@@ -52,7 +54,9 @@ Classified as 'Other' based on: [White / American Indian or Alaska Native]
 Classified as 'Other' based on: [White / American Indian or Alaska Native]
 Classified as 'Other' based on: [White / American Indian or Alaska Native]
 Classified as 'Other' based on: [White / American Indian or Alaska Native]
-Classified as 'Other' based on: [White / Native Hawaiian or Pacific Islander]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
+Classified as 'Other' based on: [White / American Indian or Alaska Native]
 Classified as 'Other' based on: [White / American Indian or Alaska Native]
 Classified as 'Other' based on: [White / American Indian or Alaska Native]
 Classified as 'Other' based on: [White / American Indian or Alaska Native]
@@ -61,66 +65,60 @@ Race:
 --------------------------------------------------
 COUNTS:
 ----------
-White                        935
-Hispanic or Latino/a         268
-Black or African American    207
-Asian                         78
-Other                         60
+White                        1299
+Hispanic or Latino/a          377
+Black or African American     290
+Asian                         119
+Other                          74
 Name: race_final, dtype: int64 
 
 PERCENTAGES:
 ----------
-White                        60.400517
-Hispanic or Latino/a         17.312661
-Black or African American    13.372093
-Asian                         5.038760
-Other                         3.875969
+White                        60.166744
+Hispanic or Latino/a         17.461788
+Black or African American    13.432145
+Asian                         5.511811
+Other                         3.427513
 Name: race_final, dtype: float64 
 
 Education:
 --------------------------------------------------
 COUNTS:
 ----------
-Some college but no degree                                                402
-High school graduate (high school diploma or equivalent including GED)    393
-Bachelor's degree in college (4-year)                                     368
-Master's degree                                                           153
-Associate degree in college (2-year)                                      142
-Less than high school degree                                               48
-Professional degree (JD, MD)                                               22
-Doctoral degree                                                            20
+Bachelor's degree in college (4-year)                                     536
+High school graduate (high school diploma or equivalent including GED)    534
+Some college but no degree                                                526
+Master's degree                                                           229
+Associate degree in college (2-year)                                      206
+Less than high school degree                                               61
+Doctoral degree                                                            35
+Professional degree (JD, MD)                                               32
 Name: edu, dtype: int64 
 
 COUNTS COMBINED:
 ----------
-Counts less than college : 843
-Counts college and beyond: 705
+Counts less than college : 1121
+Counts college and beyond: 1038
 
 PERCENTAGES COMBINED:
 ----------
-Percent less than college : 54.45736434108527%
-Percent college and beyond: 45.542635658914726%
+Percent less than college : 51.92218619731357%
+Percent college and beyond: 48.07781380268643%
 Party ID:
 --------------------------------------------------
 COUNTS:
 ----------
-Democrat         746
-Republican       662
-Independent      103
-No preference     28
-Don't know         5
-Other              4
-Name: party_id, dtype: int64 
+Dem    1095
+Rep     943
+Ind     121
+Name: party_recoded, dtype: int64 
 
 PERCENTAGES:
 ----------
-Democrat         48.191214
-Republican       42.764858
-Independent       6.653747
-No preference     1.808786
-Don't know        0.322997
-Other             0.258398
-Name: party_id, dtype: float64 
+Dem    50.717925
+Rep    43.677629
+Ind     5.604447
+Name: party_recoded, dtype: float64 
 
 CHECKING FOR GROUP DIFFERENCES
 ##################################################
@@ -134,30 +132,35 @@ COUNTS:
 1   Belief   Control    Male    116
 2   Belief    Forced  Female    138
 3   Belief    Forced    Male    109
-4   Belief  Optional  Female    126
-5   Belief  Optional    Male    133
-6   Belief  Optional   Other      2
-7    Share   Control  Female    145
-8    Share   Control    Male    122
-9    Share    Forced  Female    147
-10   Share    Forced    Male    122
-11   Share  Optional  Female    131
-12   Share  Optional    Male    132 
+4   Belief  Human-FC  Female    163
+5   Belief  Human-FC    Male    137
+6   Belief  Optional  Female    126
+7   Belief  Optional    Male    133
+8   Belief  Optional   Other      2
+9    Share   Control  Female    145
+10   Share   Control    Male    122
+11   Share    Forced  Female    147
+12   Share    Forced    Male    122
+13   Share  Human-FC  Female    178
+14   Share  Human-FC    Male    132
+15   Share  Human-FC   Other      1
+16   Share  Optional  Female    131
+17   Share  Optional    Male    132 
 
-Drop two participants who report as 'Other / Non-binary'
+Drop 3 participants who report as 'Other / Non-binary'
 
 STATISTICAL DIFFERENCE BASED ON GROUP:
 ----------
 	- Group: Belief
-	- Chi-squared statistic: 2.6482285880750873
-	- p-value: 0.2660384866433127
-	- Degrees of freedom: 2
+	- Chi-squared statistic: 3.089485318469366
+	- p-value: 0.3780330248829946
+	- Degrees of freedom: 3
 -------------------------------------------------- 
 
 	- Group: Share
-	- Chi-squared statistic: 1.549150263138376
-	- p-value: 0.4608995610789106
-	- Degrees of freedom: 2
+	- Chi-squared statistic: 3.3590061046455695
+	- p-value: 0.3395141676326775
+	- Degrees of freedom: 3
 -------------------------------------------------- 
 
 Race:
@@ -175,39 +178,49 @@ COUNTS:
 7   Belief    Forced       Hispanic or Latino/a     30
 8   Belief    Forced                      Other      7
 9   Belief    Forced                      White    163
-10  Belief  Optional                      Asian      4
-11  Belief  Optional  Black or African American     36
-12  Belief  Optional       Hispanic or Latino/a     42
-13  Belief  Optional                      Other      6
-14  Belief  Optional                      White    173
-15   Share   Control                      Asian     18
-16   Share   Control  Black or African American     42
-17   Share   Control       Hispanic or Latino/a     63
-18   Share   Control                      Other      9
-19   Share   Control                      White    135
-20   Share    Forced                      Asian     18
-21   Share    Forced  Black or African American     34
-22   Share    Forced       Hispanic or Latino/a     59
-23   Share    Forced                      Other     12
-24   Share    Forced                      White    146
-25   Share  Optional                      Asian     12
-26   Share  Optional  Black or African American     32
-27   Share  Optional       Hispanic or Latino/a     38
-28   Share  Optional                      Other     15
-29   Share  Optional                      White    166 
+10  Belief  Human-FC                      Asian     26
+11  Belief  Human-FC  Black or African American     34
+12  Belief  Human-FC       Hispanic or Latino/a     51
+13  Belief  Human-FC                      Other      7
+14  Belief  Human-FC                      White    182
+15  Belief  Optional                      Asian      4
+16  Belief  Optional  Black or African American     36
+17  Belief  Optional       Hispanic or Latino/a     42
+18  Belief  Optional                      Other      6
+19  Belief  Optional                      White    173
+20   Share   Control                      Asian     18
+21   Share   Control  Black or African American     42
+22   Share   Control       Hispanic or Latino/a     63
+23   Share   Control                      Other      9
+24   Share   Control                      White    135
+25   Share    Forced                      Asian     18
+26   Share    Forced  Black or African American     34
+27   Share    Forced       Hispanic or Latino/a     59
+28   Share    Forced                      Other     12
+29   Share    Forced                      White    146
+30   Share  Human-FC                      Asian     15
+31   Share  Human-FC  Black or African American     49
+32   Share  Human-FC       Hispanic or Latino/a     58
+33   Share  Human-FC                      Other      7
+34   Share  Human-FC                      White    182
+35   Share  Optional                      Asian     12
+36   Share  Optional  Black or African American     32
+37   Share  Optional       Hispanic or Latino/a     38
+38   Share  Optional                      Other     15
+39   Share  Optional                      White    166 
 
 STATISTICAL DIFFERENCE BASED ON GROUP:
 ----------
 Group: Belief
-Chi-squared statistic: 10.33766295166669
-p-value: 0.242121540889373
-Degrees of freedom: 8
+Chi-squared statistic: 20.426976848226243
+p-value: 0.0594279451793542
+Degrees of freedom: 12
 -------------------------------------------------- 
 
 Group: Share
-Chi-squared statistic: 14.648612495907692
-p-value: 0.06634904009831259
-Degrees of freedom: 8
+Chi-squared statistic: 19.75947015376938
+p-value: 0.07177498721576482
+Degrees of freedom: 12
 -------------------------------------------------- 
 
 Age:
@@ -227,43 +240,55 @@ COUNTS:
 9   Belief    Forced       45-54     42
 10  Belief    Forced       55-64     47
 11  Belief    Forced         65+     47
-12  Belief  Optional       18-24     23
-13  Belief  Optional       25-34     49
-14  Belief  Optional       35-44     33
-15  Belief  Optional       45-54     37
-16  Belief  Optional       55-64     58
-17  Belief  Optional         65+     61
-18   Share   Control       18-24     31
-19   Share   Control       25-34     41
-20   Share   Control       35-44     44
-21   Share   Control       45-54     50
-22   Share   Control       55-64     38
-23   Share   Control         65+     63
-24   Share    Forced       18-24     38
-25   Share    Forced       25-34     41
-26   Share    Forced       35-44     46
-27   Share    Forced       45-54     56
-28   Share    Forced       55-64     41
-29   Share    Forced         65+     47
-30   Share  Optional       18-24     32
-31   Share  Optional       25-34     43
-32   Share  Optional       35-44     50
-33   Share  Optional       45-54     51
-34   Share  Optional       55-64     36
-35   Share  Optional         65+     51 
+12  Belief  Human-FC       18-24     14
+13  Belief  Human-FC       25-34     57
+14  Belief  Human-FC       35-44     59
+15  Belief  Human-FC       45-54     53
+16  Belief  Human-FC       55-64     48
+17  Belief  Human-FC         65+     69
+18  Belief  Optional       18-24     23
+19  Belief  Optional       25-34     49
+20  Belief  Optional       35-44     33
+21  Belief  Optional       45-54     37
+22  Belief  Optional       55-64     58
+23  Belief  Optional         65+     61
+24   Share   Control       18-24     31
+25   Share   Control       25-34     41
+26   Share   Control       35-44     44
+27   Share   Control       45-54     50
+28   Share   Control       55-64     38
+29   Share   Control         65+     63
+30   Share    Forced       18-24     38
+31   Share    Forced       25-34     41
+32   Share    Forced       35-44     46
+33   Share    Forced       45-54     56
+34   Share    Forced       55-64     41
+35   Share    Forced         65+     47
+36   Share  Human-FC       18-24     16
+37   Share  Human-FC       25-34     62
+38   Share  Human-FC       35-44     51
+39   Share  Human-FC       45-54     52
+40   Share  Human-FC       55-64     59
+41   Share  Human-FC         65+     71
+42   Share  Optional       18-24     32
+43   Share  Optional       25-34     43
+44   Share  Optional       35-44     50
+45   Share  Optional       45-54     51
+46   Share  Optional       55-64     36
+47   Share  Optional         65+     51 
 
 STATISTICAL DIFFERENCE BASED ON GROUP:
 ----------
 Group: Belief
-Chi-squared statistic: 11.409573574894276
-p-value: 0.3265108493280284
-Degrees of freedom: 10
+Chi-squared statistic: 22.22650665651638
+p-value: 0.10200080264687525
+Degrees of freedom: 15
 -------------------------------------------------- 
 
 Group: Share
-Chi-squared statistic: 4.5392628857697
-p-value: 0.9197594768853874
-Degrees of freedom: 10
+Chi-squared statistic: 23.916062473524338
+p-value: 0.06653266785180464
+Degrees of freedom: 15
 -------------------------------------------------- 
 
 Education:
@@ -275,77 +300,85 @@ COUNTS:
 1   Belief   Control  no degree    124
 2   Belief    Forced     degree    123
 3   Belief    Forced  no degree    124
-4   Belief  Optional     degree    123
-5   Belief  Optional  no degree    138
-6    Share   Control     degree    112
-7    Share   Control  no degree    155
-8    Share    Forced     degree    108
-9    Share    Forced  no degree    161
-10   Share  Optional     degree    122
-11   Share  Optional  no degree    141 
+4   Belief  Human-FC     degree    176
+5   Belief  Human-FC  no degree    124
+6   Belief  Optional     degree    123
+7   Belief  Optional  no degree    138
+8    Share   Control     degree    112
+9    Share   Control  no degree    155
+10   Share    Forced     degree    108
+11   Share    Forced  no degree    161
+12   Share  Human-FC     degree    157
+13   Share  Human-FC  no degree    154
+14   Share  Optional     degree    122
+15   Share  Optional  no degree    141 
 
 STATISTICAL DIFFERENCE BASED ON GROUP:
 ----------
 Group: Belief
-Chi-squared statistic: 0.3635047867098671
-p-value: 0.8338077712027212
-Degrees of freedom: 2
+Chi-squared statistic: 9.288153091452296
+p-value: 0.02569520506800669
+Degrees of freedom: 3
+-------------------------------------------------- 
+
+Significant difference between groups found
+Performing pairwise chi-squared tests for group: Belief
+  Condition 1 Condition 2  Chi-squared Statistic   p-value  Adjusted p-value
+0     Control      Forced               0.034434  0.852787          5.116725
+1     Control    Human-FC               5.111676  0.023765          0.142592
+2     Control    Optional               0.052475  0.818811          4.912864
+3      Forced    Human-FC               3.949304  0.046891          0.281345
+4      Forced    Optional               0.263477  0.607742          3.646450
+5    Human-FC    Optional               7.011170  0.008100          0.048602
 -------------------------------------------------- 
 
 Group: Share
-Chi-squared statistic: 2.234444820337958
-p-value: 0.3271873258539441
-Degrees of freedom: 2
+Chi-squared statistic: 7.544949463752525
+p-value: 0.05641468680837438
+Degrees of freedom: 3
 -------------------------------------------------- 
 
 Party ID:
 --------------------------------------------------
 COUNTS:
 ----------
-     Group Condition       party_id  count
-0   Belief   Control       Democrat    110
-1   Belief   Control     Don't know      1
-2   Belief   Control    Independent     14
-3   Belief   Control  No preference      2
-4   Belief   Control     Republican    114
-5   Belief    Forced       Democrat    121
-6   Belief    Forced    Independent     13
-7   Belief    Forced  No preference      4
-8   Belief    Forced          Other      1
-9   Belief    Forced     Republican    108
-10  Belief  Optional       Democrat    128
-11  Belief  Optional     Don't know      1
-12  Belief  Optional    Independent     16
-13  Belief  Optional  No preference      2
-14  Belief  Optional     Republican    114
-15   Share   Control       Democrat    130
-16   Share   Control     Don't know      2
-17   Share   Control    Independent     24
-18   Share   Control  No preference      8
-19   Share   Control          Other      2
-20   Share   Control     Republican    101
-21   Share    Forced       Democrat    128
-22   Share    Forced     Don't know      1
-23   Share    Forced    Independent     23
-24   Share    Forced  No preference      8
-25   Share    Forced          Other      1
-26   Share    Forced     Republican    108
-27   Share  Optional       Democrat    129
-28   Share  Optional    Independent     13
-29   Share  Optional  No preference      4
-30   Share  Optional     Republican    117 
+     Group Condition party_recoded  count
+0   Belief   Control           Dem    114
+1   Belief   Control           Ind      9
+2   Belief   Control           Rep    118
+3   Belief    Forced           Dem    125
+4   Belief    Forced           Ind     10
+5   Belief    Forced           Rep    112
+6   Belief  Human-FC           Dem    157
+7   Belief  Human-FC           Ind     23
+8   Belief  Human-FC           Rep    120
+9   Belief  Optional           Dem    133
+10  Belief  Optional           Ind     11
+11  Belief  Optional           Rep    117
+12   Share   Control           Dem    142
+13   Share   Control           Ind     18
+14   Share   Control           Rep    107
+15   Share    Forced           Dem    135
+16   Share    Forced           Ind     19
+17   Share    Forced           Rep    115
+18   Share  Human-FC           Dem    153
+19   Share  Human-FC           Ind     22
+20   Share  Human-FC           Rep    136
+21   Share  Optional           Dem    136
+22   Share  Optional           Ind      9
+23   Share  Optional           Rep    118 
 
 STATISTICAL DIFFERENCE BASED ON GROUP:
 ----------
 Group: Belief
-Chi-squared statistic: 2.0835266877736007
-p-value: 0.9118585088844947
+Chi-squared statistic: 8.929125200111956
+p-value: 0.17760343106891024
 Degrees of freedom: 6
 -------------------------------------------------- 
 
 Group: Share
-Chi-squared statistic: 6.4813818799341085
-p-value: 0.37147635458963435
+Chi-squared statistic: 5.440445189382938
+p-value: 0.4886837368978464
 Degrees of freedom: 6
 -------------------------------------------------- 
 
