@@ -1,0 +1,98 @@
+MODEL ACCURACY
+##################################################
+
+CONDITION: RAW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     false       18
+          unsure       2
+True      unsure      13
+          false        4
+          true         3
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     false       0.90
+          unsure      0.10
+True      unsure      0.65
+          false       0.20
+          true        0.15
+Name: judgment, dtype: float64
+
+
+
+CONDITION: UNSURE=TRUE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       18
+          True         2
+True      True        16
+          False        4
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       0.9
+          True        0.1
+True      True        0.8
+          False       0.2
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 0.89
+	- Recall   : 0.80
+	- F1       : 0.84
+Veracity: False
+-------------------------
+	- Precision: 0.82
+	- Recall   : 0.90
+	- F1       : 0.86
+
+CONDITION: UNSURE=FALSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+Counts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       20
+True      False       17
+          True         3
+Name: judgment, dtype: int64
+
+
+Proportions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+veracity  judgment
+False     False       1.00
+True      False       0.85
+          True        0.15
+Name: judgment, dtype: float64
+
+
+Metrics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Veracity: True
+-------------------------
+	- Precision: 1.00
+	- Recall   : 0.15
+	- F1       : 0.26
+Veracity: False
+-------------------------
+	- Precision: 0.54
+	- Recall   : 1.00
+	- F1       : 0.70

@@ -1,0 +1,44 @@
+Group 			| Att. Check Fail % 	| Drop out % 	| Total %
+-----------------------------------------------------------------
+Belief-Control | 63.25% | 1.46% | 64.71%
+Belief-Forced | 55.06% | 3.98% | 59.04%
+Belief-HumanFC | 67.32% | 3.33% | 70.65%
+Belief-Optional | 54.26% | 5.27% | 59.53%
+Share-Control | 50.27% | 1.80% | 52.06%
+Share-Forced | n/a | 6.06% | 9.43%
+Share-HumanFC | 60.05% | 3.19% | 63.24%
+Share-Optional | 54.96% | 3.62% | 58.58%
+Note: We experienced Qualtrics data collection error with respect to the Shared-Forced group's attention check question.
+
+
+Non-experimental attrition*:
+	- Did not consent: 551
+	- Too young: 58
+	- Would not vouch for good answers: 86
+	- Not US resident: 37
+*Subjects were never assigned to an experimental group
+
+
+Differential attrition:
+--------------------------------------------------
+Comparing Belief groups (Chi-squared contingency):
+Statistic: 31.662708649401072
+pvalue   : 6.16400371663156e-07
+
+Comparing Share groups (Chi-squared contingency):
+Statistic: 17.311434257122475
+pvalue   : 0.00017412848206521238
+
+
+
+Pairwise chi-squared tests (Belief):
+           Group1           Group2  p-value-adj  Significant
+0  Belief-Control    Belief-Forced     0.125311        False
+1  Belief-Control   Belief-HumanFC     0.034666         True
+2  Belief-Control  Belief-Optional     0.176698        False
+
+
+Pairwise chi-squared tests (Share):
+          Group1          Group2  p-value-adj  Significant
+0  Share-Control   Share-HumanFC     0.000081         True
+1  Share-Control  Share-Optional     0.055466        False

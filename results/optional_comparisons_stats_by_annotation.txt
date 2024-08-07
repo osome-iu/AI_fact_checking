@@ -1,0 +1,118 @@
+Running tests comparing the opt-in and opt-out groups...
+
+MEAN DIFFERENCES
+Note: All results compare the opt-in versus opt-out groups.
+--------------------------------------------------
+	- Belief: Veracity: True | Judged: true
+		- Mean difference (opt in - opt out): 0.0746
+		- Mean difference (opt in - opt out; %): 7.46%
+	- Belief: Veracity: True | Judged: false
+		- Mean difference (opt in - opt out): -0.1659
+		- Mean difference (opt in - opt out; %): -16.59%
+	- Belief: Veracity: True | Judged: unsure
+		- Mean difference (opt in - opt out): 0.0551
+		- Mean difference (opt in - opt out; %): 5.51%
+	- Belief: Veracity: False | Judged: false
+		- Mean difference (opt in - opt out): 0.2935
+		- Mean difference (opt in - opt out; %): 29.35%
+	- Belief: Veracity: False | Judged: unsure
+		- Mean difference (opt in - opt out): 0.2812
+		- Mean difference (opt in - opt out; %): 28.12%
+	- Share: Veracity: True | Judged: true
+		- Mean difference (opt in - opt out): 0.3946
+		- Mean difference (opt in - opt out; %): 39.46%
+	- Share: Veracity: True | Judged: false
+		- Mean difference (opt in - opt out): 0.2939
+		- Mean difference (opt in - opt out; %): 29.39%
+	- Share: Veracity: True | Judged: unsure
+		- Mean difference (opt in - opt out): 0.3424
+		- Mean difference (opt in - opt out; %): 34.24%
+	- Share: Veracity: False | Judged: false
+		- Mean difference (opt in - opt out): 0.3763
+		- Mean difference (opt in - opt out; %): 37.63%
+	- Share: Veracity: False | Judged: unsure
+		- Mean difference (opt in - opt out): 0.3739
+		- Mean difference (opt in - opt out; %): 37.39%
+
+STATS
+--------------------------------------------------
+	Belief | Veracity: True | Judged: true
+		- pval             : 0.010269663319602815
+		- pval (corrected) : 0.04107865327841126
+		- pval (corr, rnd) : 0.0411
+		- U                : 10941.0
+		- Cohen's d        : 0.1841
+		- 95% CI           : [-0.0150, 0.1635]
+		- 95% CI (%)       : [-1.50%, 16.35%]
+	Belief | Veracity: True | Judged: false
+		- pval             : 9.199552231757597e-08
+		- pval (corrected) : 3.679820892703039e-07
+		- pval (corr, rnd) : 0.0000
+		- U                : 10299.0
+		- Cohen's d        : -0.3528
+		- 95% CI           : [-0.2634, -0.0724]
+		- 95% CI (%)       : [-26.34%, -7.24%]
+	Belief | Veracity: True | Judged: unsure
+		- pval             : 0.39687054707719915
+		- pval (corrected) : 1.0
+		- pval (corr, rnd) : 1.0000
+		- U                : 20452.5
+		- Cohen's d        : 0.1195
+		- 95% CI           : [-0.0370, 0.1447]
+		- 95% CI (%)       : [-3.70%, 14.47%]
+	Belief | Veracity: False | Judged: false
+		- pval             : 0.0012319111153759746
+		- pval (corrected) : 0.004927644461503899
+		- pval (corr, rnd) : 0.0049
+		- U                : 23480.0
+		- Cohen's d        : 0.6260
+		- 95% CI           : [0.2081, 0.3793]
+		- 95% CI (%)       : [20.81%, 37.93%]
+	Belief | Veracity: False | Judged: unsure
+		- pval             : 2.2856778778190823e-05
+		- pval (corrected) : 9.142711511276329e-05
+		- pval (corr, rnd) : 0.0001
+		- U                : 14260.0
+		- Cohen's d        : 0.6381
+		- 95% CI           : [0.1843, 0.3812]
+		- 95% CI (%)       : [18.43%, 38.12%]
+	Share | Veracity: True | Judged: true
+		- pval             : 3.5068284841757725e-11
+		- pval (corrected) : 1.402731393670309e-10
+		- pval (corr, rnd) : 0.0000
+		- U                : 19914.0
+		- Cohen's d        : 0.8504
+		- 95% CI           : [0.3000, 0.4915]
+		- 95% CI (%)       : [30.00%, 49.15%]
+	Share | Veracity: True | Judged: false
+		- pval             : 1.7752323163450517e-06
+		- pval (corrected) : 7.100929265380207e-06
+		- pval (corr, rnd) : 0.0000
+		- U                : 18239.5
+		- Cohen's d        : 0.6151
+		- 95% CI           : [0.1976, 0.3875]
+		- 95% CI (%)       : [19.76%, 38.75%]
+	Share | Veracity: True | Judged: unsure
+		- pval             : 4.613303925586263e-10
+		- pval (corrected) : 1.8453215702345052e-09
+		- pval (corr, rnd) : 0.0000
+		- U                : 24324.0
+		- Cohen's d        : 0.7094
+		- 95% CI           : [0.2518, 0.4317]
+		- 95% CI (%)       : [25.18%, 43.17%]
+	Share | Veracity: False | Judged: false
+		- pval             : 1.1109808493785765e-09
+		- pval (corrected) : 4.443923397514306e-09
+		- pval (corr, rnd) : 0.0000
+		- U                : 24512.0
+		- Cohen's d        : 0.7370
+		- 95% CI           : [0.2830, 0.4683]
+		- 95% CI (%)       : [28.30%, 46.83%]
+	Share | Veracity: False | Judged: unsure
+		- pval             : 1.3921458593682654e-09
+		- pval (corrected) : 5.5685834374730615e-09
+		- pval (corr, rnd) : 0.0000
+		- U                : 16246.0
+		- Cohen's d        : 0.8131
+		- 95% CI           : [0.2680, 0.4713]
+		- 95% CI (%)       : [26.80%, 47.13%]
