@@ -13,13 +13,15 @@ Outputs:
 
 Author: Matthew DeVerna
 """
+
 import os
+import sys
+
 import numpy as np
 import pandas as pd
-
 import scipy.stats as stats
 
-import sys
+from itertools import combinations
 
 DATA_CLEANING_DIR = "../data_cleaning"
 sys.path.insert(0, DATA_CLEANING_DIR)
@@ -27,8 +29,35 @@ sys.path.insert(0, DATA_CLEANING_DIR)
 from db import find_file
 
 DATA_DIR = "../../data/cleaned_data/"
+# FNAME = find_file(DATA_DIR, "*long_form.parquet")
 FNAME = find_file(DATA_DIR, "*long_form_cgpt_fc_paper.parquet")
 ROOT_DIR = "data_analysis"
+
+
+# Function to perform pairwise chi-squared tests
+def pairwise_chi2_test(data, group_col, condition_col, count_col, alpha=0.05):
+    results = []
+    # Get unique conditions
+    conditions = data[condition_col].unique()
+    # Perform pairwise comparisons
+    for cond1, cond2 in combinations(conditions, 2):
+        sub_data = data[data[condition_col].isin([cond1, cond2])]
+        contingency_table = (
+            sub_data.pivot(index=group_col, columns=condition_col, values=count_col)
+            .fillna(0)
+            .values
+        )
+        chi2_stat, p_val, dof, expected = stats.chi2_contingency(contingency_table)
+        results.append((cond1, cond2, chi2_stat, p_val))
+
+    # Adjust p-values using Bonferroni correction
+    results_df = pd.DataFrame(
+        results,
+        columns=["Condition 1", "Condition 2", "Chi-squared Statistic", "p-value"],
+    )
+    results_df["Adjusted p-value"] = results_df["p-value"] * len(results)
+
+    return results_df
 
 
 def get_participant_race(response):
@@ -97,7 +126,11 @@ if __name__ == "__main__":
     ### AGE ###
     # --------------------------#
 
-    df["age"] = 2023 - df["year_birth"]
+    # Calculate participant age. Human-FC groups subtracted from 2024 vs. the others
+    # from 2023 given that the study was conducted at different times.
+    human_fc_mask = df["Condition"] == "Human-FC"
+    df.loc[human_fc_mask, "age"] = 2024 - df.loc[human_fc_mask, "year_birth"]
+    df.loc[~human_fc_mask, "age"] = 2023 - df.loc[~human_fc_mask, "year_birth"]
 
     bins = [18, 25, 35, 45, 55, 65, np.inf]
     labels = ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"]
@@ -179,11 +212,11 @@ if __name__ == "__main__":
     print("-" * 50)
     print("COUNTS:")
     print("-" * 10)
-    print(df["party_id"].value_counts(), "\n")
+    print(df["party_recoded"].value_counts(), "\n")
 
     print("PERCENTAGES:")
     print("-" * 10)
-    print((df["party_id"].value_counts() / total_participants) * 100, "\n")
+    print((df["party_recoded"].value_counts() / total_participants) * 100, "\n")
 
     ### CHECKING FOR GROUP DIFFERENCES ###
     # Note on stats:
@@ -213,7 +246,10 @@ if __name__ == "__main__":
     )
     print(counts_by_group_and_gender, "\n")
 
-    print("Drop two participants who report as 'Other / Non-binary'\n")
+    num_other = counts_by_group_and_gender[
+        counts_by_group_and_gender.gender == "Other"
+    ]["count"].sum()
+    print(f"Drop {num_other} participants who report as 'Other / Non-binary'\n")
     counts_by_group_and_gender = counts_by_group_and_gender[
         counts_by_group_and_gender.gender != "Other"
     ]
@@ -353,7 +389,16 @@ if __name__ == "__main__":
         print("Degrees of freedom:", dof)
         print("-" * 50, "\n")
 
-    ### AGE ###
+        if p_val < 0.05:
+            print("Significant difference between groups found")
+            print("Performing pairwise chi-squared tests for group:", group)
+            pairwise_results = pairwise_chi2_test(
+                group_counts, "edu_simple", "Condition", "count"
+            )
+            print(pairwise_results)
+            print("-" * 50, "\n")
+
+    ### PARTY ###
     # --------------------------#
     print("Party ID:")
     print("-" * 50)
@@ -361,7 +406,7 @@ if __name__ == "__main__":
     print("-" * 10)
 
     counts_by_group_and_party_id = (
-        df.groupby(["Group", "Condition", "party_id"])["party_id"]
+        df.groupby(["Group", "Condition", "party_recoded"])["party_recoded"]
         .count()
         .to_frame("count")
         .reset_index()
@@ -378,7 +423,7 @@ if __name__ == "__main__":
 
         chi2_stat, p_val, dof, expected_freq = stats.chi2_contingency(
             group_counts.pivot(
-                index="party_id", columns=["Group", "Condition"], values="count"
+                index="party_recoded", columns=["Group", "Condition"], values="count"
             )
             .dropna()
             .values,
@@ -390,3 +435,12 @@ if __name__ == "__main__":
         print("p-value:", p_val)
         print("Degrees of freedom:", dof)
         print("-" * 50, "\n")
+
+        if p_val < 0.05:
+            print("Significant difference between groups found")
+            print("Performing pairwise chi-squared tests for group:", group)
+            pairwise_results = pairwise_chi2_test(
+                group_counts, "party_recoded", "Condition", "count"
+            )
+            print(pairwise_results)
+            print("-" * 50, "\n")

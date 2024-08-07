@@ -16,6 +16,7 @@ Outputs:
 
 Author: Matthew DeVerna
 """
+
 import os
 import datetime
 import pprint
@@ -64,7 +65,9 @@ all_coded["q_num"] = all_coded["filename"].apply(lambda x: int(x.split("_")[0]))
 
 # Save the data
 today = datetime.datetime.now().strftime("%Y-%m-%d")
-all_coded.to_csv(os.path.join(DATA_DIR, f"{today}_annotations_merged.csv"), index=False)
+all_coded.to_csv(
+    os.path.join(DATA_DIR, f"{today}_annotations_merged_public.csv"), index=False
+)
 
 # Extract only the columns that we coded
 coded_cols = all_coded.columns[3:-2]

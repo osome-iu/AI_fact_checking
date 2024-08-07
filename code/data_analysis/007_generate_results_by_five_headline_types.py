@@ -19,6 +19,7 @@ Outputs:
 
 Author: Matthew DeVerna
 """
+
 import os
 import sys
 
@@ -43,6 +44,10 @@ from db import find_file
 DATA_DIR = "../../data/cleaned_data/"
 FNAME = find_file(DATA_DIR, "*long_form_cgpt_fc_paper.parquet")
 all_data = pd.read_parquet(FNAME)
+
+# The five-way comparison scenario doesn't make sense for the Human-FC condition
+# because they do not see the LLM judgments
+all_data = all_data[all_data["Condition"] != "Human-FC"]
 
 # Combine the ground truth with the ChatGPT guesses to create a new coding column
 gtruth_cgpt = [

@@ -12,6 +12,7 @@ Outputs:
 
 Author: Harry Yaojun Yan & Matthew DeVerna
 """
+
 import os
 import sys
 
@@ -42,7 +43,7 @@ DATA_DIR = "../../results/"
 DISCERNMENT_FNAME = "discernment_df_main_groups_only.csv"
 ROOT_DIR = "data_analysis"
 
-GROUP_NAMES = ["Control", "Forced", "Optional"]
+GROUP_NAMES = ["Control", "Forced", "Optional", "Human_FC"]
 
 
 if __name__ == "__main__":
@@ -103,10 +104,16 @@ if __name__ == "__main__":
     b_optional_v_control = (
         mean_discernment.Belief.Optional - mean_discernment.Belief.Control
     )
+    b_humanfc_v_control = (
+        mean_discernment.Belief["Human-FC"] - mean_discernment.Belief.Control
+    )
 
     s_forced_v_control = mean_discernment.Share.Forced - mean_discernment.Share.Control
     s_optional_v_control = (
         mean_discernment.Share.Optional - mean_discernment.Share.Control
+    )
+    s_humanfc_v_control = (
+        mean_discernment.Share["Human-FC"] - mean_discernment.Share.Control
     )
 
     print("Belief:")
@@ -118,6 +125,10 @@ if __name__ == "__main__":
         f"\t- Optional - Control: {b_optional_v_control:.4f} ",
         f"({b_optional_v_control:.2%})",
     )
+    print(
+        f"\t- Human-FC - Control: {b_humanfc_v_control:.4f} ",
+        f"({b_humanfc_v_control:.2%})",
+    )
     print("Share:")
     print(
         f"\t- Forced - Control  : {s_forced_v_control:.4f} ",
@@ -126,6 +137,10 @@ if __name__ == "__main__":
     print(
         f"\t- Optional - Control: {s_optional_v_control:.4f} ",
         f"({s_optional_v_control:.2%})",
+    )
+    print(
+        f"\t- Human-FC - Control: {s_humanfc_v_control:.4f} ",
+        f"({s_humanfc_v_control:.2%})",
     )
     print("-" * 10)
     print(
@@ -185,6 +200,9 @@ if __name__ == "__main__":
     b_optional = df_discern[
         (df_discern.Condition == "Optional") & (df_discern.Group == "Belief")
     ].discernment
+    b_human_fc = df_discern[
+        (df_discern.Condition == "Human-FC") & (df_discern.Group == "Belief")
+    ].discernment
 
     s_control = df_discern[
         (df_discern.Condition == "Control") & (df_discern.Group == "Share")
@@ -195,14 +213,17 @@ if __name__ == "__main__":
     s_optional = df_discern[
         (df_discern.Condition == "Optional") & (df_discern.Group == "Share")
     ].discernment
+    s_human_fc = df_discern[
+        (df_discern.Condition == "Human-FC") & (df_discern.Group == "Share")
+    ].discernment
 
     print("Belief:")
-    stat, p = levene(b_control, b_forced, b_optional)
+    stat, p = levene(b_control, b_forced, b_optional, b_human_fc)
     print(f"\t- Levene test statistic: {stat}")
     print(f"\t- Levene test p-value: {p}\n")
 
     print("Share:")
-    stat, p = levene(s_control, s_forced, s_optional)
+    stat, p = levene(s_control, s_forced, s_optional, s_human_fc)
     print(f"\t- Levene test statistic: {stat}")
     print(f"\t- Levene test p-value: {p}\n")
 
@@ -211,7 +232,7 @@ if __name__ == "__main__":
 
     print("Belief:")
     print("-" * 25)
-    stat, p = kruskal(b_control, b_forced, b_optional)
+    stat, p = kruskal(b_control, b_forced, b_optional, b_human_fc)
     print(f"Kruskal-Wallis statistic: {stat}")
     print(f"Kruskal-Wallis test p-value: {p}\n")
 
@@ -260,7 +281,7 @@ if __name__ == "__main__":
 
     print("Share:")
     print("-" * 25)
-    stat, p = kruskal(s_control, s_forced, s_optional)
+    stat, p = kruskal(s_control, s_forced, s_optional, s_human_fc)
     print(f"Kruskal-Wallis test statistic: {stat}")
     print(f"Kruskal-Wallis test p-value: {p}\n")
 
@@ -355,6 +376,9 @@ if __name__ == "__main__":
     b_optional = df_discern[
         (df_discern.Condition == "Optional") & (df_discern.Group == "Belief")
     ].prop_yes_True
+    b_human_fc = df_discern[
+        (df_discern.Condition == "Human-FC") & (df_discern.Group == "Belief")
+    ].prop_yes_True
 
     s_control = df_discern[
         (df_discern.Condition == "Control") & (df_discern.Group == "Share")
@@ -365,14 +389,17 @@ if __name__ == "__main__":
     s_optional = df_discern[
         (df_discern.Condition == "Optional") & (df_discern.Group == "Share")
     ].prop_yes_True
+    s_human_fc = df_discern[
+        (df_discern.Condition == "Human-FC") & (df_discern.Group == "Share")
+    ].prop_yes_True
 
     print("Belief:")
-    stat, p = levene(b_control, b_forced, b_optional)
+    stat, p = levene(b_control, b_forced, b_optional, b_human_fc)
     print(f"\t- Levene test statistic: {stat}")
     print(f"\t- Levene test p-value: {p}\n")
 
     print("Share:")
-    stat, p = levene(s_control, s_forced, s_optional)
+    stat, p = levene(s_control, s_forced, s_optional, s_human_fc)
     print(f"\t- Levene test statistic: {stat}")
     print(f"\t- Levene test p-value: {p}\n")
 
@@ -381,7 +408,7 @@ if __name__ == "__main__":
 
     print("Belief:")
     print("-" * 25)
-    stat, p = kruskal(b_control, b_forced, b_optional)
+    stat, p = kruskal(b_control, b_forced, b_optional, b_human_fc)
     print(f"Kruskal-Wallis statistic: {stat}")
     print(f"Kruskal-Wallis test p-value: {p}\n")
 
@@ -397,6 +424,7 @@ if __name__ == "__main__":
             group2vals = eval(f"b_{group2name.lower()}")
 
             # Calculate effect sizes and 95% CIs
+            mean_diff = np.mean(group1vals) - np.mean(group2vals)
             cohensd = cohen_d(group1vals, group2vals)
             low95, high95 = mean_diff_bootstrap_ci(
                 group1vals, group2vals, confidence=0.95, d_only=False
@@ -407,6 +435,7 @@ if __name__ == "__main__":
                 alternative="two-sided",
             )
             mwu_results[(group1name, group2name)] = {
+                "mean_diff": mean_diff,
                 "statistic": mwu.statistic,
                 "p_value": mwu.pvalue,
                 "p_value_corrected": bonferroni_correction(mwu.pvalue, n_groups),
@@ -418,6 +447,8 @@ if __name__ == "__main__":
     print("Mann-Whitney U Tests")
     for (group1, group2), result in mwu_results.items():
         print(f"\t- {group1} vs {group2}:")
+        print(f'\t\t- Mean-diff (prop): {result["mean_diff"]:.3f}')
+        print(f'\t\t- Mean-diff (%): {result["mean_diff"]:.2%}')
         print(f'\t\t- Statistic: {result["statistic"]:.3f}')
         print(f'\t\t- P-value: {result["p_value"]:.3f}')
         print(
@@ -430,7 +461,7 @@ if __name__ == "__main__":
 
     print("Share:")
     print("-" * 25)
-    stat, p = kruskal(s_control, s_forced, s_optional)
+    stat, p = kruskal(s_control, s_forced, s_optional, s_human_fc)
     print(f"Kruskal-Wallis test statistic: {stat}")
     print(f"Kruskal-Wallis test p-value: {p}\n")
 
@@ -446,6 +477,7 @@ if __name__ == "__main__":
             group2vals = eval(f"s_{group2name.lower()}")
 
             # Calculate effect sizes and 95% CIs
+            mean_diff = np.mean(group1vals) - np.mean(group2vals)
             cohensd = cohen_d(group1vals, group2vals)
             low95, high95 = mean_diff_bootstrap_ci(
                 group1vals, group2vals, confidence=0.95, d_only=False
@@ -456,6 +488,7 @@ if __name__ == "__main__":
                 alternative="two-sided",
             )
             mwu_results[(group1name, group2name)] = {
+                "mean_diff": mean_diff,
                 "statistic": mwu.statistic,
                 "p_value": mwu.pvalue,
                 "p_value_corrected": bonferroni_correction(mwu.pvalue, n_groups),
@@ -467,6 +500,8 @@ if __name__ == "__main__":
     print("Mann-Whitney U Tests")
     for (group1, group2), result in mwu_results.items():
         print(f"\t- {group1} vs {group2}:")
+        print(f'\t\t- Mean-diff (prop): {result["mean_diff"]:.3f}')
+        print(f'\t\t- Mean-diff (%): {result["mean_diff"]:.2%}')
         print(f'\t\t- Statistic: {result["statistic"]:.3f}')
         print(f'\t\t- P-value: {result["p_value"]:.3f}')
         print(
@@ -525,6 +560,9 @@ if __name__ == "__main__":
     b_optional = df_discern[
         (df_discern.Condition == "Optional") & (df_discern.Group == "Belief")
     ].prop_yes_False
+    b_human_fc = df_discern[
+        (df_discern.Condition == "Human-FC") & (df_discern.Group == "Belief")
+    ].prop_yes_False
 
     s_control = df_discern[
         (df_discern.Condition == "Control") & (df_discern.Group == "Share")
@@ -535,14 +573,17 @@ if __name__ == "__main__":
     s_optional = df_discern[
         (df_discern.Condition == "Optional") & (df_discern.Group == "Share")
     ].prop_yes_False
+    s_human_fc = df_discern[
+        (df_discern.Condition == "Human-FC") & (df_discern.Group == "Share")
+    ].prop_yes_False
 
     print("Belief:")
-    stat, p = levene(b_control, b_forced, b_optional)
+    stat, p = levene(b_control, b_forced, b_optional, b_human_fc)
     print(f"\t- Levene test statistic: {stat}")
     print(f"\t- Levene test p-value: {p}\n")
 
     print("Share:")
-    stat, p = levene(s_control, s_forced, s_optional)
+    stat, p = levene(s_control, s_forced, s_optional, s_human_fc)
     print(f"\t- Levene test statistic: {stat}")
     print(f"\t- Levene test p-value: {p}\n")
 
@@ -551,7 +592,7 @@ if __name__ == "__main__":
 
     print("Belief:")
     print("-" * 25)
-    stat, p = kruskal(b_control, b_forced, b_optional)
+    stat, p = kruskal(b_control, b_forced, b_optional, b_human_fc)
     print(f"Kruskal-Wallis statistic: {stat}")
     print(f"Kruskal-Wallis test p-value: {p}\n")
 
@@ -567,6 +608,7 @@ if __name__ == "__main__":
             group2vals = eval(f"b_{group2name.lower()}")
 
             # Calculate effect sizes and 95% CIs
+            mean_diff = np.mean(group1vals) - np.mean(group2vals)
             cohensd = cohen_d(group1vals, group2vals)
             low95, high95 = mean_diff_bootstrap_ci(
                 group1vals, group2vals, confidence=0.95, d_only=False
@@ -577,6 +619,7 @@ if __name__ == "__main__":
                 alternative="two-sided",
             )
             mwu_results[(group1name, group2name)] = {
+                "mean_diff": mean_diff,
                 "statistic": mwu.statistic,
                 "p_value": mwu.pvalue,
                 "p_value_corrected": bonferroni_correction(mwu.pvalue, n_groups),
@@ -588,6 +631,8 @@ if __name__ == "__main__":
     print("Mann-Whitney U Tests")
     for (group1, group2), result in mwu_results.items():
         print(f"\t- {group1} vs {group2}:")
+        print(f'\t\t- Mean-diff (prop): {result["mean_diff"]:.3f}')
+        print(f'\t\t- Mean-diff (%): {result["mean_diff"]:.2%}')
         print(f'\t\t- Statistic: {result["statistic"]:.3f}')
         print(f'\t\t- P-value: {result["p_value"]:.3f}')
         print(
@@ -600,7 +645,7 @@ if __name__ == "__main__":
 
     print("Share:")
     print("-" * 25)
-    stat, p = kruskal(s_control, s_forced, s_optional)
+    stat, p = kruskal(s_control, s_forced, s_optional, s_human_fc)
     print(f"Kruskal-Wallis test statistic: {stat}")
     print(f"Kruskal-Wallis test p-value: {p}\n")
 
@@ -616,6 +661,7 @@ if __name__ == "__main__":
             group2vals = eval(f"s_{group2name.lower()}")
 
             # Calculate effect sizes and 95% CIs
+            mean_diff = np.mean(group1vals) - np.mean(group2vals)
             cohensd = cohen_d(group1vals, group2vals)
             low95, high95 = mean_diff_bootstrap_ci(
                 group1vals, group2vals, confidence=0.95, d_only=False
@@ -626,6 +672,7 @@ if __name__ == "__main__":
                 alternative="two-sided",
             )
             mwu_results[(group1name, group2name)] = {
+                "mean_diff": mean_diff,
                 "statistic": mwu.statistic,
                 "p_value": mwu.pvalue,
                 "p_value_corrected": bonferroni_correction(mwu.pvalue, n_groups),
@@ -637,6 +684,8 @@ if __name__ == "__main__":
     print("Mann-Whitney U Tests")
     for (group1, group2), result in mwu_results.items():
         print(f"\t- {group1} vs {group2}:")
+        print(f'\t\t- Mean-diff (prop): {result["mean_diff"]:.3f}')
+        print(f'\t\t- Mean-diff (%): {result["mean_diff"]:.2%}')
         print(f'\t\t- Statistic: {result["statistic"]:.3f}')
         print(f'\t\t- P-value: {result["p_value"]:.3f}')
         print(
